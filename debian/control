@@ -1,0 +1,24 @@
+Source: flycheck
+Section: lisp
+Priority: optional
+Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
+Uploaders: Sean Whitton <spwhitton@spwhitton.name>
+Build-Depends: debhelper (>= 9), dh-elpa (>= 0.0.19)
+Standards-Version: 3.9.6
+Homepage: http://flycheck.org/
+Vcs-Git: https://anonscm.debian.org/git/pkg-emacsen/pkg/flycheck.git
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-emacsen/pkg/flycheck.git/
+
+Package: elpa-flycheck
+Architecture: all
+Depends: ${misc:Depends}, emacs, ${elpa:Depends}
+Built-Using: ${misc:Built-Using}
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs24
+Description: modern on-the-fly syntax checking for Emacs
+ Flycheck uses various syntax checking and linting tools to
+ automatically check the contents of buffers while the user types, and
+ reports warnings and errors directly in the buffer, or in an optional
+ error list.
+ .
+ It is intended to replace the older Flymake which is part of Emacs core.

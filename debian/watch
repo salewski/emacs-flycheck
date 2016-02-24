@@ -1,0 +1,3 @@
+version=3
+opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/flycheck-$1\.tar\.gz/ \
+  https://github.com/flycheck/flycheck/tags .*/v?(\d\S*)\.tar\.gz
