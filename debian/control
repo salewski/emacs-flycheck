@@ -3,7 +3,7 @@ Section: lisp
 Priority: optional
 Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
 Uploaders: Sean Whitton <spwhitton@spwhitton.name>
-Build-Depends: debhelper (>= 9), dh-elpa (>= 0.0.19)
+Build-Depends: debhelper (>= 9), dh-elpa (>= 0.0.19), dash-el, elpa-let-alist
 Standards-Version: 3.9.6
 Homepage: http://flycheck.org/
 Vcs-Git: https://anonscm.debian.org/git/pkg-emacsen/pkg/flycheck.git
