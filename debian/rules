@@ -11,4 +11,4 @@ override_dh_auto_test:
 	emacs --batch -Q \
 		--eval "(progn (require 'package) (add-to-list 'package-directory-list \"/usr/share/emacs/site-lisp/elpa-src\"))" \
 		-f package-initialize \
-		-l test/run
+		-l test/run.el
