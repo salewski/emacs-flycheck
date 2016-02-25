@@ -3,6 +3,9 @@
 %:
 	dh $@ --parallel --with elpa
 
+override_dh_auto_build:
+	/bin/true
+
 # TODO:
 override_dh_auto_test:
 	emacs --batch -Q \
