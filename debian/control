@@ -7,7 +7,8 @@ Build-Depends: dash-el,
                debhelper (>= 9),
                dh-elpa (>= 0.0.19),
                elpa-let-alist | emacs25,
-               elpa-seq | emacs25
+               elpa-seq | emacs25,
+               elpa-shut-up
 Standards-Version: 3.9.6
 Homepage: http://flycheck.org/
 Vcs-Git: https://anonscm.debian.org/git/pkg-emacsen/pkg/flycheck.git
@@ -15,7 +16,12 @@ Vcs-Browser: https://anonscm.debian.org/cgit/pkg-emacsen/pkg/flycheck.git/
 
 Package: elpa-flycheck
 Architecture: all
-Depends: emacs, ${elpa:Depends}, ${misc:Depends}
+Depends: dash-el,
+         elpa-let-alist | emacs25,
+         elpa-pkg-info,
+         elpa-seq | emacs25,
+         emacs,
+         ${misc:Depends}
 Built-Using: ${misc:Built-Using}
 Recommends: emacs (>= 46.0)
 Enhances: emacs, emacs24
