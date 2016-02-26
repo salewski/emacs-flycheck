@@ -1,0 +1,30 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Fri, 26 Feb 2016 09:27:40 -0700
+Subject: disable-sqlint-test
+
+sqlint not available in Debian
+---
+ test/flycheck-test.el | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index 09aac68..0db6c1b 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -4794,11 +4794,11 @@ Why not:
+    "language/slim.slim" 'slim-mode
+    `(2 1 error "Unexpected indentation" :checker slim)))
+ 
+-(flycheck-ert-def-checker-test sqllint sql nil
+-  (flycheck-ert-should-syntax-check
+-   "language/sql.sql" 'sql-mode
+-   `(1 15 error "unterminated quoted string at or near \"';\n  \" (scan.l:1087)"
+-       :checker sql-sqlint)))
++;; (flycheck-ert-def-checker-test sqllint sql nil
++;;   (flycheck-ert-should-syntax-check
++;;    "language/sql.sql" 'sql-mode
++;;    `(1 15 error "unterminated quoted string at or near \"';\n  \" (scan.l:1087)"
++;;        :checker sql-sqlint)))
+ 
+ (flycheck-ert-def-checker-test tex-chktex (tex latex) nil
+   (flycheck-ert-should-syntax-check
