@@ -5,3 +5,4 @@
 0007-fix-flake8-expected-values.patch
 0006-set-C-locale-and-patch-C-and-fortran-tests.patch
 0007-clear-GPG-agent-env-vars.patch
+0008-set-epg-gpg-home-directory.patch

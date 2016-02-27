@@ -1,0 +1,27 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Sat, 27 Feb 2016 11:35:48 -0700
+Subject: set epg-gpg-home-directory
+
+gpg immediately dies with an error when invoked if the current user's
+home directory does not exist (as is the case on a Debian package
+autobuilder).  This causes all tests that invoke gpg to be skipped.
+Setting `epg-gpg-home-directory` when running the test suite fixes the
+problem, making the test suite more portable.
+---
+ test/run.el | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/test/run.el b/test/run.el
+index 56a81c2..0a1a8cb 100755
+--- a/test/run.el
++++ b/test/run.el
+@@ -138,7 +138,8 @@ Node `(ert)Test Selectors' for information about test selectors."
+       (load (expand-file-name "flycheck-test"
+                               (file-name-directory current-file)))))
+ 
+-  (let ((debug-on-error t))
++  (let ((debug-on-error t)
++        (epg-gpg-home-directory "/tmp"))
+     (flycheck-run-tests-batch-and-exit)))
+ 
+ (when (and noninteractive (flycheck-runs-this-script-p))

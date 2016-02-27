@@ -10,10 +10,8 @@ override_dh_installchangelogs:
 	dh_installchangelogs CHANGES.md
 
 override_dh_auto_test:
-	# epg-gpg-home-directory: so gpg can be invoked in buildd chroot
 	emacs --batch -Q \
 		--eval "(progn (require 'package) (add-to-list 'package-directory-list \"/usr/share/emacs/site-lisp/elpa-src\"))" \
 		-f package-initialize \
 		-L /usr/share/emacs/site-lisp/dash-el \
-		--eval "(setq epg-gpg-home-directory \"/tmp\")" \
 		-l test/run.el
