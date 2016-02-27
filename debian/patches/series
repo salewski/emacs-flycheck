@@ -1,7 +1,8 @@
 0001-fix-autoload-tests.patch
 0002-disable-sqlint-test.patch
-0003-patch-C-tests.patch
-0004-patch-fortran-tests.patch
 0005-update-shellcheck-expected-values.patch
 0006-update-pylint-expected-values.patch
 0007-fix-flake8-expected-values.patch
+0003-patch-C-tests.patch
+0004-patch-fortran-tests.patch
+0008-hack-run-env-vars.patch
