@@ -8,7 +8,8 @@ Build-Depends: dash-el,
                dh-elpa (>= 0.0.19),
                elpa-let-alist | emacs25,
                elpa-seq | emacs25,
-               elpa-shut-up
+               elpa-shut-up,
+               gnupg
 Standards-Version: 3.9.6
 Homepage: http://flycheck.org/
 Vcs-Git: https://anonscm.debian.org/git/pkg-emacsen/pkg/flycheck.git
