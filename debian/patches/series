@@ -1,3 +1,4 @@
 0001-fix-autoload-tests.patch
 0002-disable-sqlint-test.patch
 0003-patch-C-tests.patch
+0004-patch-fortran-tests.patch
