@@ -1,23 +1,25 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Sat, 27 Feb 2016 11:17:00 -0700
-Subject: set C locale and patch C and fortran tests
+Subject: set C locale and patch C, Haskell and fortran tests
 Forwarded: https://github.com/flycheck/flycheck/pull/889
 
-gcc and gfortran output smartquotes in a Unicode locale and pure ASCII
-in the C locale.  Flycheck's test suite assumes a Unicode locale, so the
-test suite can unexpectedly fail when only the C locale is available.
+gcc, ghc and gfortran output smartquotes in a Unicode locale and pure
+ASCII in the C locale.  Flycheck's test suite assumes a Unicode
+locale, so the test suite can unexpectedly fail when only the C locale
+is available.
 
 This patch sets the test suite to always use the C locale and updates
-expected gcc and gfortran output accordingly.  This makes the test suite
-more portable, in particular to the Debian package autobuilder
-infrastructure.
+expected gcc, ghc and gfortran output accordingly.  This makes the
+test suite more portable, in particular to the Debian package
+autobuilder infrastructure.
+
 ---
- test/flycheck-test.el | 8 ++++----
- test/run.el           | 2 ++
- 2 files changed, 6 insertions(+), 4 deletions(-)
+ test/flycheck-test.el | 20 ++++++++++----------
+ test/run.el           |  2 ++
+ 2 files changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index 35422dc..5b48a61 100644
+index 35422dc..a375ef0 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
 @@ -3623,7 +3623,7 @@ of the file will be interrupted because there are too many #ifdef configurations
@@ -50,6 +52,46 @@ index 35422dc..5b48a61 100644
          :checker fortran-gfortran)))
  
  (flycheck-ert-def-checker-test go-gofmt go syntax-error
+@@ -4036,16 +4036,16 @@ See https://github.com/flycheck/flycheck/issues/531 and Emacs bug #19206"))
+   (let ((flycheck-disabled-checkers '(haskell-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/SyntaxError.hs" 'haskell-mode
+-     '(3 1 error "parse error on input ‘module’" :checker haskell-stack-ghc))))
++     '(3 1 error "parse error on input `module'" :checker haskell-stack-ghc))))
+ 
+ (flycheck-ert-def-checker-test haskell-stack-ghc haskell type-error
+   (let ((flycheck-disabled-checkers '(haskell-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/Error.hs" 'haskell-mode
+-     '(4 16 error "Couldn't match type ‘Bool’ with ‘[Char]’
++     '(4 16 error "Couldn't match type `Bool' with `[Char]'
+ Expected type: String
+   Actual type: Bool
+-In the first argument of ‘putStrLn’, namely ‘True’
++In the first argument of `putStrLn', namely `True'
+ In the expression: putStrLn True" :checker haskell-stack-ghc))))
+ 
+ (flycheck-ert-def-checker-test (haskell-stack-ghc haskell-hlint) haskell literate
+@@ -4077,16 +4077,16 @@ Why not:
+   (let ((flycheck-disabled-checkers '(haskell-stack-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/SyntaxError.hs" 'haskell-mode
+-     '(3 1 error "parse error on input ‘module’" :checker haskell-ghc))))
++     '(3 1 error "parse error on input `module'" :checker haskell-ghc))))
+ 
+ (flycheck-ert-def-checker-test haskell-ghc haskell type-error
+   (let ((flycheck-disabled-checkers '(haskell-stack-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/Error.hs" 'haskell-mode
+-     '(4 16 error "Couldn't match type ‘Bool’ with ‘[Char]’
++     '(4 16 error "Couldn't match type `Bool' with `[Char]'
+ Expected type: String
+   Actual type: Bool
+-In the first argument of ‘putStrLn’, namely ‘True’
++In the first argument of `putStrLn', namely `True'
+ In the expression: putStrLn True" :checker haskell-ghc))))
+ 
+ (flycheck-ert-def-checker-test (haskell-ghc haskell-hlint) haskell literate
 diff --git a/test/run.el b/test/run.el
 index 2b68967..9145d97 100755
 --- a/test/run.el

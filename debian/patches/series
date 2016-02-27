@@ -6,4 +6,3 @@
 0006-set-C-locale-and-patch-C-and-fortran-tests.patch
 0007-clear-GPG-agent-env-vars.patch
 0008-set-epg-gpg-home-directory.patch
-0009-patch-GHC-tests-too.patch
