@@ -1,6 +1,7 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Sat, 27 Feb 2016 11:35:48 -0700
 Subject: set epg-gpg-home-directory
+Forwarded: https://github.com/flycheck/flycheck/pull/891
 
 gpg immediately dies with an error when invoked if the current user's
 home directory does not exist (as is the case on a Debian package
