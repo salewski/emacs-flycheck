@@ -3,6 +3,4 @@
 0005-update-shellcheck-expected-values.patch
 0006-update-pylint-expected-values.patch
 0007-fix-flake8-expected-values.patch
-0003-patch-C-tests.patch
-0004-patch-fortran-tests.patch
-0008-hack-run-env-vars.patch
+0006-set-C-locale-and-patch-C-and-fortran-tests.patch

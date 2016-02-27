@@ -1,0 +1,64 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Fri, 26 Feb 2016 21:45:21 -0700
+Subject: set C locale and patch C and fortran tests
+
+gcc and gfortran output smartquotes in a Unicode locale and pure ASCII
+in the C locale.  Flycheck's test suite assumes a Unicode locale, so the
+test suite can unexpectedly fail when only the C locale is available.
+
+This patch sets the test suite to always use the C locale and updates
+expected gcc and gfortran output accordingly.  This makes the test suite
+more portable, in particular to the Debian package autobuilder
+infrastructure.
+---
+ test/flycheck-test.el | 8 ++++----
+ test/run.el           | 2 ++
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index 35422dc..5b48a61 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -3623,7 +3623,7 @@ of the file will be interrupted because there are too many #ifdef configurations
+   (let ((flycheck-disabled-checkers '(c/c++-clang)))
+     (flycheck-ert-should-syntax-check
+      "language/c_c++/error.cpp" 'c++-mode
+-     '(2 18 error "‘struct A’ has no member named ‘bar’"
++     '(2 18 error "'struct A' has no member named 'bar'"
+          :checker c/c++-gcc))))
+ 
+ (flycheck-ert-def-checker-test c/c++-gcc (c c++) fatal-error
+@@ -3637,7 +3637,7 @@ of the file will be interrupted because there are too many #ifdef configurations
+   (let ((flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck)))
+     (flycheck-ert-should-syntax-check
+      "language/c_c++/warning.c" 'c-mode
+-     '(5 10 warning "unused variable ‘unused’" :checker c/c++-gcc)
++     '(5 10 warning "unused variable 'unused'" :checker c/c++-gcc)
+      '(7 15 warning "comparison between signed and unsigned integer expressions"
+          :checker c/c++-gcc)
+      '(8 7 warning "#warning" :checker c/c++-gcc))))
+@@ -3911,9 +3911,9 @@ See https://github.com/flycheck/flycheck/issues/531 and Emacs bug #19206"))
+ (flycheck-ert-def-checker-test fortran-gfortran fortran warning
+   (flycheck-ert-should-syntax-check
+    "language/fortran/warning.f90" '(fortran-mode f90-mode)
+-   '(1 20 warning "Unused dummy argument ‘p’ at (1)"
++   '(1 20 warning "Unused dummy argument 'p' at (1)"
+        :checker fortran-gfortran)
+-   '(18 9 warning "Same actual argument associated with INTENT(IN) argument ‘a’ and INTENT(OUT) argument ‘b’ at (1)"
++   '(18 9 warning "Same actual argument associated with INTENT(IN) argument 'a' and INTENT(OUT) argument 'b' at (1)"
+         :checker fortran-gfortran)))
+ 
+ (flycheck-ert-def-checker-test go-gofmt go syntax-error
+diff --git a/test/run.el b/test/run.el
+index 2b68967..9145d97 100755
+--- a/test/run.el
++++ b/test/run.el
+@@ -119,6 +119,8 @@ Node `(ert)Test Selectors' for information about test selectors."
+          (current-file (if load-in-progress load-file-name (buffer-file-name)))
+          (source-directory (locate-dominating-file current-file "Cask"))
+          (pkg-rel-dir (format ".cask/%s/elpa" emacs-version)))
++    (setenv "LC_ALL" "C")
++
+     (setq package-user-dir (expand-file-name pkg-rel-dir source-directory))
+     (package-initialize)
+ 
