@@ -1,0 +1,52 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Sat, 27 Feb 2016 12:53:41 -0700
+Subject: patch GHC tests too
+
+---
+ test/flycheck-test.el | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index 5b48a61..a375ef0 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -4036,16 +4036,16 @@ See https://github.com/flycheck/flycheck/issues/531 and Emacs bug #19206"))
+   (let ((flycheck-disabled-checkers '(haskell-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/SyntaxError.hs" 'haskell-mode
+-     '(3 1 error "parse error on input ‘module’" :checker haskell-stack-ghc))))
++     '(3 1 error "parse error on input `module'" :checker haskell-stack-ghc))))
+ 
+ (flycheck-ert-def-checker-test haskell-stack-ghc haskell type-error
+   (let ((flycheck-disabled-checkers '(haskell-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/Error.hs" 'haskell-mode
+-     '(4 16 error "Couldn't match type ‘Bool’ with ‘[Char]’
++     '(4 16 error "Couldn't match type `Bool' with `[Char]'
+ Expected type: String
+   Actual type: Bool
+-In the first argument of ‘putStrLn’, namely ‘True’
++In the first argument of `putStrLn', namely `True'
+ In the expression: putStrLn True" :checker haskell-stack-ghc))))
+ 
+ (flycheck-ert-def-checker-test (haskell-stack-ghc haskell-hlint) haskell literate
+@@ -4077,16 +4077,16 @@ Why not:
+   (let ((flycheck-disabled-checkers '(haskell-stack-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/SyntaxError.hs" 'haskell-mode
+-     '(3 1 error "parse error on input ‘module’" :checker haskell-ghc))))
++     '(3 1 error "parse error on input `module'" :checker haskell-ghc))))
+ 
+ (flycheck-ert-def-checker-test haskell-ghc haskell type-error
+   (let ((flycheck-disabled-checkers '(haskell-stack-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/Error.hs" 'haskell-mode
+-     '(4 16 error "Couldn't match type ‘Bool’ with ‘[Char]’
++     '(4 16 error "Couldn't match type `Bool' with `[Char]'
+ Expected type: String
+   Actual type: Bool
+-In the first argument of ‘putStrLn’, namely ‘True’
++In the first argument of `putStrLn', namely `True'
+ In the expression: putStrLn True" :checker haskell-ghc))))
+ 
+ (flycheck-ert-def-checker-test (haskell-ghc haskell-hlint) haskell literate
