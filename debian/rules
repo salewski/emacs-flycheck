@@ -11,6 +11,8 @@ override_dh_installchangelogs:
 	dh_installchangelogs CHANGES.md
 
 override_dh_auto_test:
+	# we don't run the tests in flycheck-checkdoc.el as these are not
+	# functional tests so are useful to upstream only, not us
 	emacs --batch -Q \
 		--eval "(progn (require 'package) (add-to-list 'package-directory-list \"/usr/share/emacs/site-lisp/elpa-src\"))" \
 		-L /usr/share/emacs/site-lisp/dash-el \
