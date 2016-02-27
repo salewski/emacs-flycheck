@@ -1,0 +1,3 @@
+# we are generating orig tarballs from git tags and the watch file is
+# only for notification of the existence of new versions
+debian-watch-may-check-gpg-signature
