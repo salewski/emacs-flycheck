@@ -9,7 +9,8 @@ Build-Depends: dash-el,
                elpa-let-alist | emacs25,
                elpa-seq | emacs25,
                elpa-shut-up,
-               gnupg
+               gnupg,
+               python
 Standards-Version: 3.9.6
 Homepage: http://flycheck.org/
 Vcs-Git: https://anonscm.debian.org/git/pkg-emacsen/pkg/flycheck.git
