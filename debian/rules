@@ -7,13 +7,11 @@ override_dh_auto_build:
 	/bin/true
 
 override_dh_auto_test:
-	# see 0003-patch-C-tests.patch for explanation of use of
-	# LC_ALL here.  Set a home directory that epg will pass to gpg
-	# so it can run
-	LC_ALL=C \
+	LC_ALL=C \		# see 0003-patch-C-tests.patch
+	TERM=dumb \ 		# to prevent epg prompting for passphrases
 	emacs --batch -Q \
 		--eval "(progn (require 'package) (add-to-list 'package-directory-list \"/usr/share/emacs/site-lisp/elpa-src\"))" \
 		-f package-initialize \
 		-L /usr/share/emacs/site-lisp/dash-el \
-		--eval "(setq epg-gpg-home-directory \"/tmp\")" \
+		--eval "(setq epg-gpg-home-directory \"/tmp\")" \ # so gpg can be invoked
 		-l test/run.el
