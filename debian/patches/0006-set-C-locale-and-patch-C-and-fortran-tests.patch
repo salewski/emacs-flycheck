@@ -1,6 +1,7 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
-Date: Fri, 26 Feb 2016 21:45:21 -0700
+Date: Sat, 27 Feb 2016 11:17:00 -0700
 Subject: set C locale and patch C and fortran tests
+Forwarded: https://github.com/flycheck/flycheck/pull/889
 
 gcc and gfortran output smartquotes in a Unicode locale and pure ASCII
 in the C locale.  Flycheck's test suite assumes a Unicode locale, so the
