@@ -12,6 +12,8 @@ override_dh_installchangelogs:
 override_dh_auto_test:
 	emacs --batch -Q \
 		--eval "(progn (require 'package) (add-to-list 'package-directory-list \"/usr/share/emacs/site-lisp/elpa-src\"))" \
-		-f package-initialize \
 		-L /usr/share/emacs/site-lisp/dash-el \
+		-L /usr/share/emacs/site-lisp/haskell-mode \
+		-l haskell-mode-autoloads.el \
+		-f package-initialize \
 		-l test/run.el
