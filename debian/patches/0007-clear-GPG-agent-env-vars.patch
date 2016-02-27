@@ -1,0 +1,28 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Sat, 27 Feb 2016 11:23:22 -0700
+Subject: clear GPG agent env vars
+
+If a GPG agent is running, EasyPG ignores the setting
+`epa-file-passphrase-alist' and prompts the user for a password
+regardless.  So unset these environment variables before running the
+test suite.
+---
+ test/run.el | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/test/run.el b/test/run.el
+index 9145d97..56a81c2 100755
+--- a/test/run.el
++++ b/test/run.el
+@@ -121,6 +121,11 @@ Node `(ert)Test Selectors' for information about test selectors."
+          (pkg-rel-dir (format ".cask/%s/elpa" emacs-version)))
+     (setenv "LC_ALL" "C")
+ 
++    ;; clear GPG agent environment variables so that EPG doesn't
++    ;; prompt for any passphrases during the test suite run
++    (setenv "GPG_TTY" "")
++    (setenv "GPG_AGENT_INFO" "")
++
+     (setq package-user-dir (expand-file-name pkg-rel-dir source-directory))
+     (package-initialize)
+ 

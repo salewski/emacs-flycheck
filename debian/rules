@@ -10,10 +10,7 @@ override_dh_installchangelogs:
 	dh_installchangelogs CHANGES.md
 
 override_dh_auto_test:
-	# LC_ALL: see 0003-patch-C-tests.patch
-	# GPG_*: to prevent epg prompting for passphrases
 	# epg-gpg-home-directory: so gpg can be invoked in buildd chroot
-	GPG_TTY="" GPG_AGENT_INFO="" \
 	emacs --batch -Q \
 		--eval "(progn (require 'package) (add-to-list 'package-directory-list \"/usr/share/emacs/site-lisp/elpa-src\"))" \
 		-f package-initialize \
