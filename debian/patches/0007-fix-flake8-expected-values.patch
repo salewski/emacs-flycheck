@@ -7,7 +7,7 @@ Subject: fix-flake8-expected-values
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index bfc05c3..bf6ab5c 100644
+index 7d730c2..5b48a61 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
 @@ -4418,8 +4418,8 @@ Why not:

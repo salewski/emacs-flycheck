@@ -3,11 +3,11 @@ Date: Sat, 27 Feb 2016 08:37:47 -0700
 Subject: update-pylint-expected-values
 
 ---
- test/flycheck-test.el | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ test/flycheck-test.el | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index 9f7644b..bfc05c3 100644
+index 9f7644b..7d730c2 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
 @@ -4450,7 +4450,7 @@ Why not:
@@ -19,6 +19,15 @@ index 9f7644b..bfc05c3 100644
            :checker python-pylint)
       '(12 1 info "No space allowed around keyword argument assignment"
            :id "bad-whitespace" :checker python-pylint)
+@@ -4472,7 +4472,7 @@ Why not:
+     (flycheck-ert-should-syntax-check
+      "language/python/test.py" 'python-mode
+      '(1 1 info "Missing module docstring" :id "C0111" :checker python-pylint)
+-     '(4 1 error "Unable to import 'spam'" :id "F0401" :checker python-pylint)
++     '(4 1 error "Unable to import 'spam'" :id "E0401" :checker python-pylint)
+      '(5 1 error "No name 'antigravit' in module 'python'" :id "E0611"
+          :checker python-pylint)
+      '(5 1 warning "Unused import antigravit" :id "W0611"
 @@ -4483,7 +4483,7 @@ Why not:
       '(9 5 info "Missing method docstring" :id "C0111" :checker python-pylint)
       '(9 5 warning "Method could be a function" :id "R0201"
