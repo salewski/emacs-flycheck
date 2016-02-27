@@ -1,7 +1,11 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Sat, 27 Feb 2016 08:36:28 -0700
 Subject: update-shellcheck-expected-values
+Forwarded: not-needed
 
+Upstream will update the expected values when the new version of
+shellcheck hits their testing environment; no need to forward this
+trivial patch.
 ---
  test/flycheck-test.el | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

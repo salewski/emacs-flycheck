@@ -1,6 +1,7 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Fri, 26 Feb 2016 09:19:11 -0700
 Subject: fix autoload tests
+Forwarded: not-needed
 
 dash-el is currently outside of the dh_elpa infrastructure and so has no
 autoloads file.  So hack the tests to use another.

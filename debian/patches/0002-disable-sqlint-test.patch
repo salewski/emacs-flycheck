@@ -1,6 +1,7 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Fri, 26 Feb 2016 09:27:40 -0700
 Subject: disable-sqlint-test
+Forwarded: not-needed
 
 sqlint not available in Debian
 ---

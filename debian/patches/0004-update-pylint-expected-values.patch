@@ -1,7 +1,9 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Sat, 27 Feb 2016 08:37:47 -0700
 Subject: update-pylint-expected-values
+Forwarded: not-needed
 
+Already merged upstream.
 ---
  test/flycheck-test.el | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
