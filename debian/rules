@@ -7,8 +7,8 @@ override_dh_auto_build:
 	/bin/true
 
 override_dh_auto_test:
-	# test suite needs a UTF-8 locale so that gcc outputs
-	# smartquotes which the test suite expects
+	# see 0003-patch-C-tests.patch for explanation of use of
+	# LC_ALL here
 	LC_ALL=C \
 	emacs --batch -Q \
 		--eval "(progn (require 'package) (add-to-list 'package-directory-list \"/usr/share/emacs/site-lisp/elpa-src\"))" \
