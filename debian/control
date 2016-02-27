@@ -3,6 +3,7 @@ Section: lisp
 Priority: optional
 Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
 Uploaders: Sean Whitton <spwhitton@spwhitton.name>
+# to make the test suite run at all:
 Build-Depends: dash-el,
                debhelper (>= 9),
                dh-elpa (>= 0.0.19),
@@ -10,7 +11,24 @@ Build-Depends: dash-el,
                elpa-seq | emacs25,
                elpa-shut-up,
                gnupg,
-               python
+               python,
+# for test suite tests that would otherwise be skipped:
+               clang,
+               gfortran,
+               haskell-stack,
+               ghc,
+               haskell-mode,
+               tidy,
+               python-flake8,
+               pylint,
+               python-sphinx,
+               elpa-rust-mode,
+               rustc,
+               shellcheck,
+               chktex,
+               lacheck,
+               zsh,
+               xmlstarlet
 Standards-Version: 3.9.6
 Homepage: http://flycheck.org/
 Vcs-Git: https://anonscm.debian.org/git/pkg-emacsen/pkg/flycheck.git
