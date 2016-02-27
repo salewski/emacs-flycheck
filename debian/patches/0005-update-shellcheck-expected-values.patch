@@ -1,0 +1,24 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Sat, 27 Feb 2016 08:36:28 -0700
+Subject: update-shellcheck-expected-values
+
+---
+ test/flycheck-test.el | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index 7810e68..9f7644b 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -4780,9 +4780,9 @@ Why not:
+   :tags '(checkstyle-xml)
+   (flycheck-ert-should-syntax-check
+    "language/sh/shellcheck.sh" 'sh-mode
+-   '(2 5 warning "Tilde does not expand in quotes. Use $HOME."
++   '(2 5 warning "Note that ~ does not expand in quotes."
+        :checker sh-shellcheck :id "SC2088")
+-   '(3 7 error "Double quote array expansions to avoid re-splitting elements."
++   '(3 7 error "Double quote array expansions, otherwise they're like $* and break on spaces."
+        :checker sh-shellcheck :id "SC2068")
+    '(4 8 warning "Declare and assign separately to avoid masking return values."
+        :checker sh-shellcheck :id "SC2155")

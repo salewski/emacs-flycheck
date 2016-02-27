@@ -7,7 +7,7 @@ Subject: patch-fortran-tests
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index b79bc39..c020680 100644
+index 970afdc..7810e68 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
 @@ -3911,9 +3911,9 @@ See https://github.com/flycheck/flycheck/issues/531 and Emacs bug #19206"))

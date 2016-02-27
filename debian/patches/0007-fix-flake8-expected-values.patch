@@ -1,0 +1,23 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Sat, 27 Feb 2016 08:40:58 -0700
+Subject: fix-flake8-expected-values
+
+---
+ test/flycheck-test.el | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index bfc05c3..bf6ab5c 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -4418,8 +4418,8 @@ Why not:
+        :checker python-flake8)
+    '(7 1 warning "expected 2 blank lines, found 1" :id "E302"
+        :checker python-flake8)
+-   '(9 9 info "function name should be lowercase"
+-       :checker python-flake8 :id "N802")
++   ;; '(9 9 info "function name should be lowercase"
++   ;;     :checker python-flake8 :id "N802")
+    '(12 29 warning "unexpected spaces around keyword / parameter equals"
+         :id "E251" :checker python-flake8)
+    '(12 31 warning "unexpected spaces around keyword / parameter equals"

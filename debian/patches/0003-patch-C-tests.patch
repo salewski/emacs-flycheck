@@ -7,11 +7,11 @@ cannot assume available in our build environment.  So patch them to
 expect the C locale and set this locale when running the test suite in
 debian/rules.
 ---
- test/flycheck-test.el | 396 +++++++++++++++++++++++++-------------------------
- 1 file changed, 198 insertions(+), 198 deletions(-)
+ test/flycheck-test.el | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index 0db6c1b..b79bc39 100644
+index 0db6c1b..970afdc 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
 @@ -3623,7 +3623,7 @@ of the file will be interrupted because there are too many #ifdef configurations
