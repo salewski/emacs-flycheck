@@ -1,0 +1,46 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Sun, 28 Feb 2016 12:27:20 -0700
+Subject: skip haskell stack tests when homedir nonexistent
+
+stack requires the user's home directory to exist.  Skip the tests of
+stack if it doesn't.  (The assumption that it exists is unwarranted on
+Debian's autobuilding infrastructure.)
+---
+ test/flycheck-test.el | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index a375ef0..a3abf7c 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -4033,12 +4033,14 @@ See https://github.com/flycheck/flycheck/issues/531 and Emacs bug #19206"))
+                               "-- | module Foo.Bar where")))
+ 
+ (flycheck-ert-def-checker-test haskell-stack-ghc haskell syntax-error
++  (skip-unless (file-exists-p (getenv "HOME")))
+   (let ((flycheck-disabled-checkers '(haskell-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/SyntaxError.hs" 'haskell-mode
+      '(3 1 error "parse error on input `module'" :checker haskell-stack-ghc))))
+ 
+ (flycheck-ert-def-checker-test haskell-stack-ghc haskell type-error
++  (skip-unless (file-exists-p (getenv "HOME")))
+   (let ((flycheck-disabled-checkers '(haskell-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/Error.hs" 'haskell-mode
+@@ -4049,6 +4051,7 @@ In the first argument of `putStrLn', namely `True'
+ In the expression: putStrLn True" :checker haskell-stack-ghc))))
+ 
+ (flycheck-ert-def-checker-test (haskell-stack-ghc haskell-hlint) haskell literate
++  (skip-unless (file-exists-p (getenv "HOME")))
+   (let ((flycheck-disabled-checkers '(haskell-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/Literate.lhs" 'literate-haskell-mode
+@@ -4057,6 +4060,7 @@ In the expression: putStrLn True" :checker haskell-stack-ghc))))
+ 
+ (flycheck-ert-def-checker-test (haskell-stack-ghc haskell-hlint) haskell
+                                complete-chain
++  (skip-unless (file-exists-p (getenv "HOME")))
+   (let ((flycheck-disabled-checkers '(haskell-ghc)))
+     (flycheck-ert-should-syntax-check
+      "language/haskell/Warnings.hs" 'haskell-mode
