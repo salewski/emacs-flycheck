@@ -11,6 +11,7 @@ Build-Depends: dash-el,
                elpa-seq | emacs25,
                elpa-shut-up,
                python,
+               texinfo,
 # for test suite tests that would otherwise be skipped:
                gnupg,
                clang,
