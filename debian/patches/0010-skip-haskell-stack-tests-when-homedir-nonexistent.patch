@@ -1,6 +1,7 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Sun, 28 Feb 2016 12:27:20 -0700
 Subject: skip haskell stack tests when homedir nonexistent
+Forwarded: https://github.com/flycheck/flycheck/pull/895
 
 stack requires the user's home directory to exist.  Skip the tests of
 stack if it doesn't.  (The assumption that it exists is unwarranted on
