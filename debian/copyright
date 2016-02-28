@@ -9,11 +9,11 @@ License: GPL-3+
 
 Files: doc/*
 Copyright: (C) 2014-2015 Sebastian Wiesner
-License: GFDL-1.3 or CC-BY-SA-4.0
+License: GFDL-1.3+ or CC-BY-SA-4.0+
 
 Files: flycheck.svg
 Copyright: (C) 2014-2015 Sebastian Wiesner
-License: CC-BY-SA-4.0
+License: CC-BY-SA-4.0+
 
 Files: test/flycheck-checkdoc.el
 Copyright: (C) 2015  Sebastian Wiesner
