@@ -6,96 +6,23 @@ Forwarded: https://github.com/flycheck/flycheck/pull/891
 gpg immediately dies with an error when invoked if the current user's
 home directory does not exist (as is the case on a Debian package
 autobuilder).  This causes all tests that invoke gpg to be skipped.
-Setting `epg-gpg-home-directory` to a temporary location when running
-tests using GPG solves the problem, making the test suite more portable.
+Setting `epg-gpg-home-directory` when running the test suite fixes the
+problem, making the test suite more portable.
 ---
- test/flycheck-test.el | 62 ++++++++++++++++++++++++++++++---------------------
- 1 file changed, 37 insertions(+), 25 deletions(-)
+ test/run.el | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index a375ef0..e8a9abf 100644
---- a/test/flycheck-test.el
-+++ b/test/flycheck-test.el
-@@ -614,13 +614,17 @@ and extension, as in `file-name-base'."
+diff --git a/test/run.el b/test/run.el
+index 56a81c2..0a1a8cb 100755
+--- a/test/run.el
++++ b/test/run.el
+@@ -138,7 +138,8 @@ Node `(ert)Test Selectors' for information about test selectors."
+       (load (expand-file-name "flycheck-test"
+                               (file-name-directory current-file)))))
  
- (ert-deftest flycheck-encrypted-buffer-p/encrypted-file-buffer ()
-   :tags '(utility external-tool)
--  (skip-unless (flycheck-ert-check-gpg))
--  (let* ((filename (flycheck-ert-resource-filename "encrypted-file.el.gpg"))
--         ;; Tell EPA about our passphrase
--         (epa-file-cache-passphrase-for-symmetric-encryption t)
--         (epa-file-passphrase-alist (list (cons filename "foo"))))
--    (flycheck-ert-with-resource-buffer filename
--      (should (flycheck-encrypted-buffer-p)))))
-+  ;; Set a fake home directory in case the real home directory
-+  ;; does not exist, which would cause GPG to exit immediately
-+  (let ((epa-gpg-home-directory (make-temp-file "tmp" t)))
-+    (skip-unless (flycheck-ert-check-gpg))
-+    (let* ((filename (flycheck-ert-resource-filename "encrypted-file.el.gpg"))
-+           ;; Tell EPA about our passphrase
-+           (epa-file-cache-passphrase-for-symmetric-encryption t)
-+           (epa-file-passphrase-alist (list (cons filename "foo"))))
-+      (flycheck-ert-with-resource-buffer filename
-+        (should (flycheck-encrypted-buffer-p))))
-+    (delete-directory epa-gpg-home-directory t)))
+-  (let ((debug-on-error t))
++  (let ((debug-on-error t)
++        (epg-gpg-home-directory "/tmp"))
+     (flycheck-run-tests-batch-and-exit)))
  
- (ert-deftest flycheck-autoloads-file-p/ephemeral-buffer ()
-   :tags '(utility)
-@@ -1597,15 +1601,19 @@ and extension, as in `file-name-base'."
- 
- (ert-deftest flycheck-may-enable-mode/not-in-encrypted-files ()
-   :tags '(global-mode external-tool)
--  (skip-unless (flycheck-ert-check-gpg))
--  (let* ((filename (flycheck-ert-resource-filename "encrypted-file.el.gpg"))
--         ;; Tell EPA about our passphrase
--         (epa-file-cache-passphrase-for-symmetric-encryption t)
--         (epa-file-passphrase-alist (list (cons filename "foo"))))
--    (flycheck-ert-with-resource-buffer filename
--      (emacs-lisp-mode)
--      (should (flycheck-get-checker-for-buffer))
--      (should-not (flycheck-may-enable-mode)))))
-+  ;; Set a fake home directory in case the real home directory
-+  ;; does not exist, which would cause GPG to exit immediately
-+  (let ((epa-gpg-home-directory (make-temp-file "tmp" t)))
-+    (skip-unless (flycheck-ert-check-gpg))
-+    (let* ((filename (flycheck-ert-resource-filename "encrypted-file.el.gpg"))
-+           ;; Tell EPA about our passphrase
-+           (epa-file-cache-passphrase-for-symmetric-encryption t)
-+           (epa-file-passphrase-alist (list (cons filename "foo"))))
-+      (flycheck-ert-with-resource-buffer filename
-+        (emacs-lisp-mode)
-+        (should (flycheck-get-checker-for-buffer))
-+        (should-not (flycheck-may-enable-mode))))
-+    (delete-directory epa-gpg-home-directory t)))
- 
- (ert-deftest flycheck-may-enable-mode/not-in-special-mode ()
-   :tags '(global-mode)
-@@ -1670,15 +1678,19 @@ and extension, as in `file-name-base'."
- 
- (ert-deftest global-flycheck-mode/does-not-enable-in-encrypted-file ()
-   :tags '(global-mode external-tool)
--  (skip-unless (flycheck-ert-check-gpg))
--  (let* ((filename (flycheck-ert-resource-filename "encrypted-file.el.gpg"))
--         ;; Tell EPA about our passphrase
--         (epa-file-cache-passphrase-for-symmetric-encryption t)
--         (epa-file-passphrase-alist (list (cons filename "foo"))))
--    (flycheck-ert-with-global-mode
--      (flycheck-ert-with-resource-buffer filename
--        (emacs-lisp-mode)
--        (should-not flycheck-mode)))))
-+  ;; Set a fake home directory in case the real home directory
-+  ;; does not exist, which would cause GPG to exit immediately
-+  (let ((epa-gpg-home-directory (make-temp-file "tmp" t)))
-+    (skip-unless (flycheck-ert-check-gpg))
-+    (let* ((filename (flycheck-ert-resource-filename "encrypted-file.el.gpg"))
-+           ;; Tell EPA about our passphrase
-+           (epa-file-cache-passphrase-for-symmetric-encryption t)
-+           (epa-file-passphrase-alist (list (cons filename "foo"))))
-+      (flycheck-ert-with-global-mode
-+        (flycheck-ert-with-resource-buffer filename
-+          (emacs-lisp-mode)
-+          (should-not flycheck-mode))))
-+    (delete-directory epa-gpg-home-directory t)))
- 
- (ert-deftest global-flycheck-mode/does-not-enable-in-special-mode ()
-   :tags '(global-mode)
+ (when (and noninteractive (flycheck-runs-this-script-p))
