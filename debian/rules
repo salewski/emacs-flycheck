@@ -4,7 +4,6 @@
 	dh $@ --parallel --with elpa
 
 override_dh_auto_build:
-	@echo Generating flycheck info files -- Cask errors may be ignored
 	make texinfo
 
 override_dh_installchangelogs:

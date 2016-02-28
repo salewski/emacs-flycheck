@@ -1,0 +1,23 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Sun, 28 Feb 2016 14:28:44 -0700
+Subject: hack Makefile to silence cmd not found errors
+
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 8366c56..40ac83a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,8 +3,8 @@ EMACSFLAGS =
+ CASK = cask
+ ERTSELECTOR = t
+ CONVERT = convert
+-VERSION := $(shell EMACS=$(EMACS) $(CASK) version)
+-PKGDIR := $(shell EMACS=$(EMACS) $(CASK) package-directory)
++# VERSION := $(shell EMACS=$(EMACS) $(CASK) version)
++# PKGDIR := $(shell EMACS=$(EMACS) $(CASK) package-directory)
+ 
+ # Export the used EMACS to recipe environments
+ export EMACS

@@ -8,3 +8,4 @@
 0008-set-epg-gpg-home-directory.patch
 0009-patch-README-for-Debian.patch
 0010-skip-haskell-stack-tests-when-homedir-nonexistent.patch
+0011-hack-Makefile-to-silence-cmd-not-found-errors.patch
