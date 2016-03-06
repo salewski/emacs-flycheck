@@ -7,8 +7,8 @@ Uploaders: Sean Whitton <spwhitton@spwhitton.name>
 Build-Depends: dash-el,
                debhelper (>= 9),
                dh-elpa (>= 0.0.19),
-               elpa-let-alist | emacs25,
-               elpa-seq | emacs25,
+               elpa-let-alist,
+               elpa-seq,
                elpa-shut-up,
                python,
                texinfo,
@@ -38,12 +38,7 @@ Vcs-Browser: https://anonscm.debian.org/cgit/pkg-emacsen/pkg/flycheck.git/
 
 Package: elpa-flycheck
 Architecture: all
-Depends: dash-el,
-         elpa-let-alist | emacs25,
-         elpa-pkg-info,
-         elpa-seq | emacs25,
-         emacs,
-         ${misc:Depends}
+Depends: ${misc:Depends}, emacs, ${elpa:Depends}, dash-el
 Built-Using: ${misc:Built-Using}
 Recommends: emacs (>= 46.0)
 Enhances: emacs, emacs24
