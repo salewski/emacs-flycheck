@@ -1,0 +1,23 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Thu, 10 Mar 2016 19:41:15 -0700
+Subject: update rustc expected values
+
+---
+ test/flycheck-test.el | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index a3abf7c..eca0cae 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -4657,9 +4657,7 @@ Why not:
+   (let ((flycheck-disabled-checkers '(rust-cargo)))
+     (flycheck-ert-should-syntax-check
+      "language/rust/src/multiline-error.rs" 'rust-mode
+-     '(7 9 error "mismatched types:
+- expected `u8`,\n    found `i8`
+-(expected u8,\n    found i8)" :checker rust :id "E0308")
++     '(7 9 error "mismatched types:\nexpected `u8`,\n    found `i8`" :checker rust :id "E0308")
+      '(7 9 info "run `rustc --explain E0308` to see a detailed explanation"
+         :checker rust))))
+ 

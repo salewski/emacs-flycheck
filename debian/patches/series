@@ -9,3 +9,4 @@
 0009-patch-README-for-Debian.patch
 0010-skip-haskell-stack-tests-when-homedir-nonexistent.patch
 0011-hack-Makefile-to-silence-cmd-not-found-errors.patch
+0012-update-rustc-expected-values.patch
