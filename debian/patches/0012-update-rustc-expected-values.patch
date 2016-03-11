@@ -17,7 +17,7 @@ index a3abf7c..eca0cae 100644
 -     '(7 9 error "mismatched types:
 - expected `u8`,\n    found `i8`
 -(expected u8,\n    found i8)" :checker rust :id "E0308")
-+     '(7 9 error "mismatched types:\nexpected `u8`,\n    found `i8`" :checker rust :id "E0308")
++     '(7 9 error "mismatched types:\n expected `u8`,\n    found `i8`" :checker rust :id "E0308")
       '(7 9 info "run `rustc --explain E0308` to see a detailed explanation"
          :checker rust))))
  
