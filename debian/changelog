@@ -1,5 +1,5 @@
-flycheck (0.25.1-1) UNRELEASED; urgency=medium
+flycheck (0.25.1-1) unstable; urgency=medium
 
   * Initial release. (Closes: #796652)
 
- -- Sean Whitton <spwhitton@spwhitton.name>  Wed, 24 Feb 2016 12:07:54 -0700
+ -- Sean Whitton <spwhitton@spwhitton.name>  Thu, 10 Mar 2016 20:56:15 -0700
