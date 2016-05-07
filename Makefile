@@ -1,76 +1,126 @@
-EMACS = emacs
-EMACSFLAGS =
+# Copyright (c) 2012-2016 Sebastian Wiesner and Flycheck contributors
+
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Programs
 CASK = cask
-ERTSELECTOR = t
+EMACS = emacs
+GIT = git
+INKSCAPE = inkscape
 CONVERT = convert
-VERSION := $(shell EMACS=$(EMACS) $(CASK) version)
-PKGDIR := $(shell EMACS=$(EMACS) $(CASK) package-directory)
+OPTIPNG = optipng
+# Program options
+EMACSOPTS =
+PATTERN = .*
 
-# Export the used EMACS to recipe environments
+# Internal variables
+EMACSBATCH = $(CASK) exec $(EMACS) -Q --batch -L . $(EMACSOPTS)
+
+# Program availability
+HAVE_CASK := $(shell sh -c "command -v $(CASK)")
+ifndef HAVE_CASK
+$(warning "$(CASK) is not available.  Please run make help")
+endif
+HAVE_INKSCAPE := $(shell sh -c "command -v $(INKSCAPE)")
+HAVE_CONVERT := $(shell sh -c "command -v $(CONVERT)")
+HAVE_OPTIPNG := $(shell sh -c "command -v $(OPTIPNG)")
+
+# Export Emacs to goals, mainly for CASK
+CASK_EMACS = $(EMACS)
 export EMACS
+export CASK_EMACS
 
-SRCS = flycheck.el flycheck-ert.el
-OBJECTS = $(SRCS:.el=.elc)
+# Run make help by default
+.DEFAULT_GOAL = help
 
-DISTDIR = dist
-BUILDDIR = build
+# File lists
+SRCS = flycheck.el flycheck-buttercup.el flycheck-ert.el
+OBJS = $(SRCS:.el=.elc)
+IMGS = doc/_static/logo.png
 
-EMACSBATCH = $(EMACS) -Q --batch $(EMACSFLAGS)
-
-.PHONY: deps compile check dist texinfo images \
-	clean clean-elc clean-doc \
-	clobber clobber-dist clobber-deps \
-	test
-
-# Build targets
-compile : $(OBJECTS)
-
-check :
-	$(EMACSBATCH) --eval '(setq checkdoc-arguments-in-order-flag nil)' \
-		-l test/flycheck-checkdoc.el \
-		-f flycheck-checkdoc-batch-and-exit -- $(SRCS)
-
-dist :
-	$(CASK) package
-
-texinfo: doc/flycheck.info
-
-images: doc/images/logo.png
-
-# Test targets
-test : $(OBJECTS)
-	$(EMACSBATCH) --script test/run.el '$(ERTSELECTOR)'
-
-# Support targets
-deps : $(PKGDIR)
-
-# Cleanup targets
-clean : clean-elc clean-doc
-clobber: clobber-dist clobber-deps
-
-clean-elc :
-	rm -rf $(OBJECTS)
-
-clean-doc:
-	rm -rf doc/flycheck.info doc/dir
-
-clobber-dist :
-	rm -rf $(DISTDIR)
-
-clobber-deps :
-	rm -rf .cask/
-
-$(PKGDIR) : Cask
-	$(CASK) install
-	touch $(PKGDIR)
-
-doc/flycheck.info: doc/flycheck.texi doc/languages.texi doc/fdl-1.3.texi
-
+# File rules
 flycheck-ert.elc: flycheck.elc
 
-%.elc : %.el $(PKGDIR)
-	$(CASK) exec $(EMACSBATCH) -L . -f batch-byte-compile $<
+flycheck-buttercup.elc: flycheck.elc
 
-doc/images/logo.png: flycheck.svg
-	$(CONVERT) $< -trim -background white \
-		-bordercolor white -border 5 $@
+$(OBJS): %.elc: %.el
+	$(EMACSBATCH) -f batch-byte-compile $<
+
+doc/_static/logo.png: flycheck.svg
+ifndef HAVE_CONVERT
+	$(error "$(CONVERT) not available.  Please run make help.")
+endif
+ifndef HAVE_INKSCAPE
+	$(error "$(INKSCAPE) not available.  Please run make help.")
+endif
+ifndef HAVE_OPTIPNG
+	$(error "$(OPTIPNG) not available.  Please run make help.")
+endif
+	$(CONVERT) $< -trim -background white -bordercolor white \
+		-border 5 $@
+	$(OPTIPNG) $@
+
+# Public targets
+.PHONY: init
+init:
+	$(CASK) install
+	$(CASK) update
+
+.PHONY: clean
+clean:
+	rm -rf $(OBJS)
+	$(MAKE) -C doc clean
+
+.PHONY: purge
+	$(GIT) clean -xfd
+
+.PHONY: compile
+compile: $(OBJS)
+
+.PHONY: specs
+specs: compile
+	$(CASK) exec buttercup -L . --pattern '$(PATTERN)' test/specs
+
+.PHONY: unit
+unit: compile
+	$(EMACSBATCH) --load test/run.el -f flycheck-run-tests-main \
+		'(not (tag external-tool))'
+
+.PHONY: int
+integ: compile
+	$(EMACSBATCH) --load test/run.el -f flycheck-run-tests-main \
+		'(tag external-tool)'
+
+.PHONY: images
+images: $(IMGS)
+
+.PHONY: help
+help:
+	@echo "Run 'make init' first to install and update all local dependencies."
+	@echo ""
+	@echo "Available targets:"
+	@echo "  init:    Initialise the project.  RUN FIRST!"
+	@echo "  compile: Byte-compile Emacs Lisp sources"
+	@echo "  specs:   Run all buttercup specs for Flycheck"
+	@echo "  unit:    Run all ERT unit tests for Flycheck (legacy)"
+	@echo "  integ:   Run all integration tests for Flycheck"
+	@echo "  images:  Generate PNG images from SVG sources"
+	@echo "  clean:   Clean compiled files"
+	@echo "  purge:   Clean everything"
+	@echo ""
+	@echo "Available programs:"
+	@echo "  $(CASK): $(if $(HAVE_CASK),yes,no)"
+	@echo ""
+	@echo "You need $(CASK) to develop Flycheck."
+	@echo "See http://cask.readthedocs.org/ for more information."
