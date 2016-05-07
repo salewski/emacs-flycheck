@@ -17,3 +17,5 @@ override_dh_auto_test:
 		-l haskell-mode-autoloads.el \
 		-f package-initialize \
 		-l test/run.el
+override_dh_auto_build:
+	/bin/true
