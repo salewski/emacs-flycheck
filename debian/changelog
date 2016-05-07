@@ -2,6 +2,9 @@ flycheck (26-1) UNRELEASED; urgency=medium
 
   * Package new upstream release.
   * Bump debhelper compat level to 10.
+  * Run test suite with dh_elpa_test.
+    - New build dependency on elpa-buttercup.
+    - Build dependency on dh-elpa tightened.
   * Drop 0004-update-pylint-expected-values.patch.
     Merged upstream.
   * Drop 0010-skip-haskell-stack-tests-when-homedir-nonexistent.patch.

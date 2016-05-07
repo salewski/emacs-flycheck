@@ -6,7 +6,8 @@ Uploaders: Sean Whitton <spwhitton@spwhitton.name>
 # to make the test suite run at all:
 Build-Depends: dash-el,
                debhelper (>= 9),
-               dh-elpa (>= 0.0.19),
+               dh-elpa (>= 0.0.20),
+               elpa-buttercup,
                elpa-let-alist,
                elpa-seq,
                elpa-shut-up,

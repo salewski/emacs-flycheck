@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+DH_ELPA_TEST_ERT_EVAL=(load "haskell-mode-autoloads")
+DH_ELPA_TEST_ERT_RUNNER=test/run.el
+
 %:
 	dh $@ --parallel --with elpa
 
@@ -7,15 +10,5 @@ override_dh_installchangelogs:
 	cat CHANGES.rst CHANGES.old > debian/.debhelper/changelog
 	dh_installchangelogs debian/.debhelper/changelog
 
-override_dh_auto_test:
-	# we don't run the tests in flycheck-checkdoc.el as these are not
-	# functional tests so are useful to upstream only, not us
-	emacs --batch -Q \
-		--eval "(progn (require 'package) (add-to-list 'package-directory-list \"/usr/share/emacs/site-lisp/elpa-src\"))" \
-		-L /usr/share/emacs/site-lisp/dash-el \
-		-L /usr/share/emacs/site-lisp/haskell-mode \
-		-l haskell-mode-autoloads.el \
-		-f package-initialize \
-		-l test/run.el
 override_dh_auto_build:
 	/bin/true
