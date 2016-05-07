@@ -9,11 +9,9 @@ autoloads file.  So hack the tests to use another.
  test/flycheck-test.el | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index a35a82a..09aac68 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -635,7 +635,7 @@ and extension, as in `file-name-base'."
+@@ -497,7 +497,7 @@
  
  (ert-deftest flycheck-autoloads-file-p/autoloads-with-backing-file ()
    :tags '(utility)
@@ -22,7 +20,7 @@ index a35a82a..09aac68 100644
      (should (flycheck-autoloads-file-p))))
  
  (ert-deftest flycheck-autoloads-file-p/a-plain-file ()
-@@ -3850,7 +3850,7 @@ See https://github.com/flycheck/flycheck/issues/531 and Emacs bug #19206"))
+@@ -3324,7 +3324,7 @@ See https://github.com/flycheck/flycheck
    ;; collect the autoloads of newly installed packages before writing the
    ;; autoloads file.  See `https://github.com/flycheck/flycheck/issues/45' and
    ;; `https://github.com/bbatsov/prelude/issues/253' for details.

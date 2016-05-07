@@ -10,11 +10,9 @@ trivial patch.
  test/flycheck-test.el | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index 7810e68..9f7644b 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -4780,9 +4780,9 @@ Why not:
+@@ -4238,9 +4238,9 @@ Why not:
    :tags '(checkstyle-xml)
    (flycheck-ert-should-syntax-check
     "language/sh/shellcheck.sh" 'sh-mode

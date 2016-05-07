@@ -18,11 +18,9 @@ autobuilder infrastructure.
  test/run.el           |  2 ++
  2 files changed, 12 insertions(+), 10 deletions(-)
 
-diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index 35422dc..a375ef0 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -3623,7 +3623,7 @@ of the file will be interrupted because there are too many #ifdef configurations
+@@ -3090,7 +3090,7 @@ of the file will be interrupted because
    (let ((flycheck-disabled-checkers '(c/c++-clang)))
      (flycheck-ert-should-syntax-check
       "language/c_c++/error.cpp" 'c++-mode
@@ -31,7 +29,7 @@ index 35422dc..a375ef0 100644
           :checker c/c++-gcc))))
  
  (flycheck-ert-def-checker-test c/c++-gcc (c c++) fatal-error
-@@ -3637,7 +3637,7 @@ of the file will be interrupted because there are too many #ifdef configurations
+@@ -3104,7 +3104,7 @@ of the file will be interrupted because
    (let ((flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck)))
      (flycheck-ert-should-syntax-check
       "language/c_c++/warning.c" 'c-mode
@@ -40,7 +38,7 @@ index 35422dc..a375ef0 100644
       '(7 15 warning "comparison between signed and unsigned integer expressions"
           :checker c/c++-gcc)
       '(8 7 warning "#warning" :checker c/c++-gcc))))
-@@ -3911,9 +3911,9 @@ See https://github.com/flycheck/flycheck/issues/531 and Emacs bug #19206"))
+@@ -3385,9 +3385,9 @@ See https://github.com/flycheck/flycheck
  (flycheck-ert-def-checker-test fortran-gfortran fortran warning
    (flycheck-ert-should-syntax-check
     "language/fortran/warning.f90" '(fortran-mode f90-mode)
@@ -52,7 +50,7 @@ index 35422dc..a375ef0 100644
          :checker fortran-gfortran)))
  
  (flycheck-ert-def-checker-test go-gofmt go syntax-error
-@@ -4036,16 +4036,16 @@ See https://github.com/flycheck/flycheck/issues/531 and Emacs bug #19206"))
+@@ -3488,17 +3488,17 @@ See https://github.com/flycheck/flycheck
    (let ((flycheck-disabled-checkers '(haskell-ghc)))
      (flycheck-ert-should-syntax-check
       "language/haskell/SyntaxError.hs" 'haskell-mode
@@ -60,6 +58,7 @@ index 35422dc..a375ef0 100644
 +     '(3 1 error "parse error on input `module'" :checker haskell-stack-ghc))))
  
  (flycheck-ert-def-checker-test haskell-stack-ghc haskell type-error
+   (skip-unless (file-exists-p (getenv "HOME")))
    (let ((flycheck-disabled-checkers '(haskell-ghc)))
      (flycheck-ert-should-syntax-check
       "language/haskell/Error.hs" 'haskell-mode
@@ -72,7 +71,7 @@ index 35422dc..a375ef0 100644
  In the expression: putStrLn True" :checker haskell-stack-ghc))))
  
  (flycheck-ert-def-checker-test (haskell-stack-ghc haskell-hlint) haskell literate
-@@ -4077,16 +4077,16 @@ Why not:
+@@ -3532,16 +3532,16 @@ Why not:
    (let ((flycheck-disabled-checkers '(haskell-stack-ghc)))
      (flycheck-ert-should-syntax-check
       "language/haskell/SyntaxError.hs" 'haskell-mode
@@ -92,13 +91,11 @@ index 35422dc..a375ef0 100644
  In the expression: putStrLn True" :checker haskell-ghc))))
  
  (flycheck-ert-def-checker-test (haskell-ghc haskell-hlint) haskell literate
-diff --git a/test/run.el b/test/run.el
-index 2b68967..9145d97 100755
 --- a/test/run.el
 +++ b/test/run.el
-@@ -119,6 +119,8 @@ Node `(ert)Test Selectors' for information about test selectors."
-          (current-file (if load-in-progress load-file-name (buffer-file-name)))
-          (source-directory (locate-dominating-file current-file "Cask"))
+@@ -108,6 +108,8 @@ Node `(ert)Test Selectors' for informati
+   (let* ((load-prefer-newer t)
+          (source-directory (locate-dominating-file flycheck-runner-file "Cask"))
           (pkg-rel-dir (format ".cask/%s/elpa" emacs-version)))
 +    (setenv "LC_ALL" "C")
 +

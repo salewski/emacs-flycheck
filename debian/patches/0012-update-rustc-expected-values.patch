@@ -6,11 +6,9 @@ Subject: update rustc expected values
  test/flycheck-test.el | 7 +++----
  1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index a3abf7c..f3186d9 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -4657,11 +4657,10 @@ Why not:
+@@ -4120,11 +4120,10 @@ Why not:
    (let ((flycheck-disabled-checkers '(rust-cargo)))
      (flycheck-ert-should-syntax-check
       "language/rust/src/multiline-error.rs" 'rust-mode

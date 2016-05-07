@@ -3,6 +3,13 @@ flycheck (26-1) UNRELEASED; urgency=medium
   * Package new upstream release.
   * Bump debhelper compat level to 10.
   * Bump standards version to 3.9.8 (no changes required).
+  * Drop 0004-update-pylint-expected-values.patch.
+    Merged upstream.
+  * Drop 0010-skip-haskell-stack-tests-when-homedir-nonexistent.patch.
+    Merged upstream.
+  * Drop 0011-hack-Makefile-to-silence-cmd-not-found-errors.patch.
+    No longer required.
+  * Refresh remaining patches.
 
  -- Sean Whitton <spwhitton@spwhitton.name>  Sat, 07 May 2016 13:58:29 -0700
 

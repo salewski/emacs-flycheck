@@ -1,12 +1,9 @@
 0001-fix-autoload-tests.patch
 0002-disable-sqlint-test.patch
 0003-update-shellcheck-expected-values.patch
-0004-update-pylint-expected-values.patch
 0005-fix-flake8-expected-values.patch
 0006-set-C-locale-and-patch-C-and-fortran-tests.patch
 0007-clear-GPG-agent-env-vars.patch
 0008-set-epg-gpg-home-directory.patch
 0009-patch-README-for-Debian.patch
-0010-skip-haskell-stack-tests-when-homedir-nonexistent.patch
-0011-hack-Makefile-to-silence-cmd-not-found-errors.patch
 0012-update-rustc-expected-values.patch

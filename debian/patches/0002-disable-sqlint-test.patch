@@ -8,11 +8,9 @@ sqlint not available in Debian
  test/flycheck-test.el | 10 +++++-----
  1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index 09aac68..0db6c1b 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -4794,11 +4794,11 @@ Why not:
+@@ -4252,11 +4252,11 @@ Why not:
     "language/slim.slim" 'slim-mode
     `(2 1 error "Unexpected indentation" :checker slim)))
  
