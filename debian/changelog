@@ -1,6 +1,7 @@
 flycheck (26-1) UNRELEASED; urgency=medium
 
   * Package new upstream release.
+  * Bump debhelper compat level to 10.
   * Bump standards version to 3.9.8 (no changes required).
 
  -- Sean Whitton <spwhitton@spwhitton.name>  Sat, 07 May 2016 13:58:29 -0700
