@@ -1,3 +1,10 @@
+flycheck (26-1) UNRELEASED; urgency=medium
+
+  * Package new upstream release.
+  * Bump standards version to 3.9.8 (no changes required).
+
+ -- Sean Whitton <spwhitton@spwhitton.name>  Sat, 07 May 2016 13:58:29 -0700
+
 flycheck (0.25.1-1) unstable; urgency=medium
 
   * Initial release. (Closes: #796652)
