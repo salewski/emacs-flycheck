@@ -10,6 +10,7 @@ flycheck (26-1) UNRELEASED; urgency=medium
   * Drop 0011-hack-Makefile-to-silence-cmd-not-found-errors.patch.
     No longer required.
   * Refresh remaining patches.
+  * Drop debian/info since upstream's info manual no longer exists.
 
  -- Sean Whitton <spwhitton@spwhitton.name>  Sat, 07 May 2016 13:58:29 -0700
 

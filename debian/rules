@@ -3,9 +3,6 @@
 %:
 	dh $@ --parallel --with elpa
 
-override_dh_auto_build:
-	make texinfo
-
 override_dh_installchangelogs:
 	dh_installchangelogs CHANGES.md
 
