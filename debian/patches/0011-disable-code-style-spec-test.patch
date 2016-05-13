@@ -8,8 +8,6 @@ outside of git.
  test/specs/test-code-style.el | 58 +++++++++++++++++++++----------------------
  1 file changed, 29 insertions(+), 29 deletions(-)
 
-diff --git a/test/specs/test-code-style.el b/test/specs/test-code-style.el
-index c581c9d..c6df5b3 100644
 --- a/test/specs/test-code-style.el
 +++ b/test/specs/test-code-style.el
 @@ -55,35 +55,35 @@

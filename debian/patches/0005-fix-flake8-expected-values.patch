@@ -12,7 +12,7 @@ trivial patch.
 
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -3878,8 +3878,8 @@ Why not:
+@@ -3897,8 +3897,8 @@ Why not:
         :checker python-flake8)
     '(7 1 warning "expected 2 blank lines, found 1" :id "E302"
         :checker python-flake8)

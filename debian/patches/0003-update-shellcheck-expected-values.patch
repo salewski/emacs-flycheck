@@ -12,7 +12,7 @@ trivial patch.
 
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -4238,9 +4238,9 @@ Why not:
+@@ -4262,9 +4262,9 @@ Why not:
    :tags '(checkstyle-xml)
    (flycheck-ert-should-syntax-check
     "language/sh/shellcheck.sh" 'sh-mode

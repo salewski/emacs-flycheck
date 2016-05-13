@@ -9,9 +9,6 @@ These tests require network access.
  1 file changed, 95 deletions(-)
  delete mode 100644 test/specs/test-melpa-package.el
 
-diff --git a/test/specs/test-melpa-package.el b/test/specs/test-melpa-package.el
-deleted file mode 100644
-index 139b154..0000000
 --- a/test/specs/test-melpa-package.el
 +++ /dev/null
 @@ -1,95 +0,0 @@

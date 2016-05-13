@@ -38,7 +38,7 @@ autobuilder infrastructure.
       '(7 15 warning "comparison between signed and unsigned integer expressions"
           :checker c/c++-gcc)
       '(8 7 warning "#warning" :checker c/c++-gcc))))
-@@ -3385,9 +3385,9 @@ See https://github.com/flycheck/flycheck
+@@ -3395,9 +3395,9 @@ See https://github.com/flycheck/flycheck
  (flycheck-ert-def-checker-test fortran-gfortran fortran warning
    (flycheck-ert-should-syntax-check
     "language/fortran/warning.f90" '(fortran-mode f90-mode)
@@ -50,7 +50,7 @@ autobuilder infrastructure.
          :checker fortran-gfortran)))
  
  (flycheck-ert-def-checker-test go-gofmt go syntax-error
-@@ -3488,17 +3488,17 @@ See https://github.com/flycheck/flycheck
+@@ -3507,17 +3507,17 @@ See https://github.com/flycheck/flycheck
    (let ((flycheck-disabled-checkers '(haskell-ghc)))
      (flycheck-ert-should-syntax-check
       "language/haskell/SyntaxError.hs" 'haskell-mode
@@ -71,7 +71,7 @@ autobuilder infrastructure.
  In the expression: putStrLn True" :checker haskell-stack-ghc))))
  
  (flycheck-ert-def-checker-test (haskell-stack-ghc haskell-hlint) haskell literate
-@@ -3532,16 +3532,16 @@ Why not:
+@@ -3551,16 +3551,16 @@ Why not:
    (let ((flycheck-disabled-checkers '(haskell-stack-ghc)))
      (flycheck-ert-should-syntax-check
       "language/haskell/SyntaxError.hs" 'haskell-mode

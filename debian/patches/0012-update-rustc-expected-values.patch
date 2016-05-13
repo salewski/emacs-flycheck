@@ -8,7 +8,7 @@ Subject: update rustc expected values
 
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -4120,11 +4120,10 @@ Why not:
+@@ -4144,11 +4144,10 @@ Why not:
    (let ((flycheck-disabled-checkers '(rust-cargo)))
      (flycheck-ert-should-syntax-check
       "language/rust/src/multiline-error.rs" 'rust-mode
