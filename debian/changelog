@@ -15,6 +15,7 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Add 0011-disable-code-style-spec-test.patch.
   * Refresh remaining patches.
   * Drop debian/info since upstream's info manual no longer exists.
+  * Don't install CREDITS.md since upstream's credits file no longer exists.
   * Merge and install two upstream changelogs.
   * Override dh_auto_build to avoid Cask.
   * Remove comments from d/control due to #823708.
