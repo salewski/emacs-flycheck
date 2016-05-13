@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
-DH_ELPA_TEST_ERT_EVAL=(load "haskell-mode-autoloads")
-DH_ELPA_TEST_ERT_RUNNER=test/run.el
+export DH_ELPA_TEST_ERT_LOAD_PATH=/usr/share/emacs/site-lisp/haskell-mode
+export DH_ELPA_TEST_ERT_HELPER=debian/ert-helper.el
 
 %:
 	dh $@ --parallel --with elpa
