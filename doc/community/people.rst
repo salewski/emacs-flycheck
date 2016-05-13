@@ -23,6 +23,8 @@ Flycheck.
 Our GPG keys are used to sign commits on Github and to sign release tags for
 Flycheck.
 
+Mention with ``@flycheck/maintainers``.
+
 .. _Flycheck Organisation: https://github.com/flycheck
 
 .. _flycheck-moderators:
@@ -35,9 +37,37 @@ dedicated moderation team; all our :ref:`flycheck-maintainers` also serve as
 moderators in our Github organisation and in our official communication
 channels.
 
+Mention with ``@flycheck/moderators``.
+
 .. note::
 
    If you’d like to help out with moderation, please contact a maintainer.
+
+Language teams
+--------------
+
+These teams provide support for particular languages in Flycheck.
+
+Go
+~~
+
+* Dominik Honnef (:gh:`dominikh`)
+
+Mention with ``@flycheck/go``.
+
+Javascript
+~~~~~~~~~~
+
+* Saša Jovanić (:gh:`Simplify`)
+
+Mention with ``@flycheck/javascript``.
+
+TypeScript
+~~~~~~~~~~
+
+* Saša Jovanić (:gh:`Simplify`)
+
+Mention with ``@flycheck/typescript``.
 
 Acknowledgements
 ================
@@ -124,6 +154,7 @@ to Flycheck:
 * Robert Dallas Gray (:gh:`rdallasgray`)
 * Robert O'Connor (:gh:`robbyoconnor`)
 * Robert Zaremba (:gh:`robert-zaremba`)
+* Saša Jovanić (:gh:`Simplify`)
 * Sean Gillespie (:gh:`swgillespie`)
 * Sean Salmon (:gh:`phatcabbage`)
 * Sebastian Beyer (:gh:`sebastianbeyer`)

@@ -1,3 +1,27 @@
+27 (May 08, 2016)
+=================
+
+- **Breaking changes**
+
+  - Require PHP Code Sniffer 2.6 or newer for ``php-phpcs`` [GH-921]
+
+- New syntax checkers:
+
+  - Go with ``go-unconvert`` [GH-905]
+  - Markdown with ``mdl`` [GH-839] [GH-916]
+  - TypeScript with ``tslint`` [GH-947] [GH-949]
+
+- Improvements:
+
+  - Pass checkdoc settings from Emacs to `emacs-lisp-checkdoc` [GH-741] [GH-937]
+
+- Bug fixes:
+
+  - Fix parsing of syntax errors in triple-quoted strings for
+    ``python-pycompile`` [GH-948]
+  - Correctly handle rules based on the current file name in ``php-phpcs``
+    [GH-921]
+
 26 (Apr 27, 2016)
 =================
 
