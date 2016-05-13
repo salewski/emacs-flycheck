@@ -13,6 +13,7 @@ flycheck (27-1) UNRELEASED; urgency=medium
     No longer required.
   * Add 0010-disable-MELPA-tests.patch.
   * Add 0011-disable-code-style-spec-test.patch.
+  * Add 0013-patch-test-runner.patch.
   * Refresh remaining patches.
   * Drop debian/info since upstream's info manual no longer exists.
   * Don't install CREDITS.md since upstream's credits file no longer exists.

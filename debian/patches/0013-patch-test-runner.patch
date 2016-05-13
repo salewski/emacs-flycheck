@@ -1,0 +1,29 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Fri, 13 May 2016 15:22:57 -0700
+Subject: patch test runner
+
+Don't load the tests in the test runner, as dh_elpa_test already does
+that and the flycheck testsuite complains if loaded more than once.
+---
+ test/run.el | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/test/run.el b/test/run.el
+index f223109..e97bf11 100644
+--- a/test/run.el
++++ b/test/run.el
+@@ -119,13 +119,7 @@ Node `(ert)Test Selectors' for information about test selectors."
+     (package-initialize)
+ 
+     (message "Running tests on Emacs %s, built at %s"
+-             emacs-version (format-time-string "%F" emacs-build-time))
+-
+-    (let ((debug-on-error t))
+-      (load (expand-file-name "flycheck" source-directory))
+-      (load (expand-file-name "flycheck-ert" source-directory))
+-      (load (expand-file-name "flycheck-test"
+-                              (file-name-directory flycheck-runner-file)))))
++             emacs-version (format-time-string "%F" emacs-build-time)))
+ 
+   (let ((debug-on-error t)
+         (epg-gpg-home-directory "/tmp"))
