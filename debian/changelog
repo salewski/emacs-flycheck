@@ -15,6 +15,9 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Drop debian/info since upstream's info manual no longer exists.
   * Merge and install two upstream changelogs.
   * Override dh_auto_build to avoid Cask.
+  * Remove comments from d/control due to #823708.
+  * Create README.source with information from comments.
+  * Run wrap-and-sort -abst.
   * Bump standards version to 3.9.8 (no changes required).
 
  -- Sean Whitton <spwhitton@spwhitton.name>  Sat, 07 May 2016 13:58:29 -0700

@@ -2,36 +2,36 @@ Source: flycheck
 Section: lisp
 Priority: optional
 Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
-Uploaders: Sean Whitton <spwhitton@spwhitton.name>
-# to make the test suite run at all:
-Build-Depends: dash-el,
-               debhelper (>= 9),
-               dh-elpa (>= 0.0.20),
-               elpa-buttercup,
-               elpa-let-alist,
-               elpa-seq,
-               elpa-shut-up,
-               python,
-               texinfo,
-# for test suite tests that would otherwise be skipped:
-               gnupg,
-               clang,
-               gfortran,
-               haskell-stack,
-               ghc,
-               haskell-mode,
-               hlint,
-               tidy,
-               python-flake8,
-               pylint,
-               python-sphinx,
-               elpa-rust-mode,
-               rustc,
-               shellcheck,
-               chktex,
-               lacheck,
-               zsh,
-               xmlstarlet
+Uploaders:
+ Sean Whitton <spwhitton@spwhitton.name>,
+Build-Depends:
+ chktex,
+ clang,
+ dash-el,
+ debhelper (>= 9),
+ dh-elpa (>= 0.0.20),
+ elpa-buttercup,
+ elpa-let-alist,
+ elpa-rust-mode,
+ elpa-seq,
+ elpa-shut-up,
+ gfortran,
+ ghc,
+ gnupg,
+ haskell-mode,
+ haskell-stack,
+ hlint,
+ lacheck,
+ pylint,
+ python,
+ python-flake8,
+ python-sphinx,
+ rustc,
+ shellcheck,
+ texinfo,
+ tidy,
+ xmlstarlet,
+ zsh,
 Standards-Version: 3.9.8
 Homepage: http://flycheck.org/
 Vcs-Git: https://anonscm.debian.org/git/pkg-emacsen/pkg/flycheck.git
@@ -39,10 +39,17 @@ Vcs-Browser: https://anonscm.debian.org/cgit/pkg-emacsen/pkg/flycheck.git/
 
 Package: elpa-flycheck
 Architecture: all
-Depends: ${misc:Depends}, emacs, ${elpa:Depends}, dash-el
+Depends:
+ dash-el,
+ emacs,
+ ${elpa:Depends},
+ ${misc:Depends},
 Built-Using: ${misc:Built-Using}
-Recommends: emacs (>= 46.0)
-Enhances: emacs, emacs24
+Recommends:
+ emacs (>= 46.0),
+Enhances:
+ emacs,
+ emacs24,
 Description: modern on-the-fly syntax checking for Emacs
  Flycheck uses various syntax checking and linting tools to
  automatically check the contents of buffers while the user types, and

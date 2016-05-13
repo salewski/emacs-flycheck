@@ -1,0 +1,38 @@
+Test suite build dependencies
+-----------------------------
+
+The following build-deps are needed to make the test suite run at all:
+
+- dash-el
+- debhelper
+- dh-elpa
+- elpa-buttercup
+- elpa-let-alist
+- elpa-seq
+- elpa-shut-up
+- python
+- texinfo
+
+The following build-deps are needed to run tests which would otherwise
+be skipped:
+
+- gnupg
+- clang
+- gfortran
+- haskell-stack
+- ghc
+- haskell-mode
+- hlint
+- tidy
+- python-flake8
+- pylint
+- python-sphinx
+- elpa-rust-mode
+- rustc
+- shellcheck
+- chktex
+- lacheck
+- zsh
+- xmlstarlet
+
+ -- Sean Whitton <spwhitton@spwhitton.name>, Fri, 13 May 2016 14:28:34 -0600
