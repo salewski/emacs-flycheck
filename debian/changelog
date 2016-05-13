@@ -11,6 +11,7 @@ flycheck (27-1) UNRELEASED; urgency=medium
     Merged upstream.
   * Drop 0011-hack-Makefile-to-silence-cmd-not-found-errors.patch.
     No longer required.
+  * Add 0010-disable-MELPA-tests.patch.
   * Refresh remaining patches.
   * Drop debian/info since upstream's info manual no longer exists.
   * Merge and install two upstream changelogs.
