@@ -8,3 +8,4 @@
 0009-patch-README-for-Debian.patch
 0012-update-rustc-expected-values.patch
 0010-disable-MELPA-tests.patch
+0011-disable-code-style-spec-test.patch
