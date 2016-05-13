@@ -7,6 +7,7 @@ Uploaders:
 Build-Depends:
  chktex,
  clang,
+ cppcheck,
  dash-el,
  debhelper (>= 9),
  dh-elpa (>= 0.0.20),

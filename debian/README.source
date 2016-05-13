@@ -34,5 +34,6 @@ be skipped:
 - lacheck
 - zsh
 - xmlstarlet
+- cppcheck
 
- -- Sean Whitton <spwhitton@spwhitton.name>, Fri, 13 May 2016 14:28:34 -0600
+ -- Sean Whitton <spwhitton@spwhitton.name>, Fri, 13 May 2016 15:25:50 -0700
