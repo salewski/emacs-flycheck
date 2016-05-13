@@ -23,6 +23,7 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Create README.source with information from comments.
   * Run wrap-and-sort -abst.
   * New build-dep for testsuite: cppcheck.
+  * Bound dh-elpa and elpa-buttercup build dependencies for bug fixes.
   * Bump standards version to 3.9.8 (no changes required).
 
  -- Sean Whitton <spwhitton@spwhitton.name>  Sat, 07 May 2016 13:58:29 -0700
