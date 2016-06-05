@@ -17,6 +17,8 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Add 0014-Fix-cppcheck-test.patch.
   * Refresh remaining patches.
   * Tighten build dependency on hlint to ensure test suite passes.
+  * Remove d/copyright entry for obsoleted file test/flycheck-checkdoc.el.
+  * Add d/copyright entry for new file test/test-code-style.el.
   * Drop debian/info since upstream's info manual no longer exists.
   * Don't install CREDITS.md since upstream's credits file no longer exists.
   * Merge and install two upstream changelogs.

@@ -15,8 +15,8 @@ Files: flycheck.svg
 Copyright: (C) 2014-2015 Sebastian Wiesner
 License: CC-BY-SA-4.0
 
-Files: test/flycheck-checkdoc.el
-Copyright: (C) 2015  Sebastian Wiesner
+Files: test/specs/test-code-style.el
+Copyright: (C) 2016  Sebastian Wiesner
 License: GPL-3+
 
 Files: debian/*
