@@ -14,6 +14,7 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Add 0010-disable-MELPA-tests.patch.
   * Add 0011-disable-code-style-spec-test.patch.
   * Add 0013-patch-test-runner.patch.
+  * Add 0014-Fix-cppcheck-test.patch.
   * Refresh remaining patches.
   * Tighten build dependency on hlint to ensure test suite passes.
   * Drop debian/info since upstream's info manual no longer exists.

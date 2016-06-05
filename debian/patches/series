@@ -10,3 +10,4 @@
 0010-disable-MELPA-tests.patch
 0011-disable-code-style-spec-test.patch
 0013-patch-test-runner.patch
+0014-Fix-cppcheck-test.patch

@@ -1,0 +1,30 @@
+Date: Sun, 5 Jun 2016 20:51:20 +0900
+Subject: Fix cppcheck test
+Origin: upstream, commit: c32c6fcbc9f0a9b62737eed85978cc135b6a4334
+
+Apply upstream's fix to cppcheck tests.  Commit message: "We need to
+test C and C++ buffers separately because not all checks apply to C
+code."
+---
+ test/flycheck-test.el | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index 643272a..ea38be8 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -3122,7 +3122,13 @@ of the file will be interrupted because there are too many #ifdef configurations
+         (flycheck-cppcheck-inconclusive nil)
+         (flycheck-cppcheck-checks '("style")))
+     (flycheck-ert-should-syntax-check
+-     "language/c_c++/style.cpp" '(c-mode c++-mode)
++     "language/c_c++/style.cpp" 'c-mode
++     '(5 nil info "Unused variable: unused" :id "unusedVariable"
++         :checker c/c++-cppcheck)
++     '(9 nil error "Division by zero." :id "zerodiv" :checker c/c++-cppcheck))
++
++    (flycheck-ert-should-syntax-check
++     "language/c_c++/style.cpp" 'c++-mode
+      '(5 nil info "Unused variable: unused" :id "unusedVariable"
+          :checker c/c++-cppcheck)
+      '(9 nil error "Division by zero." :id "zerodiv" :checker c/c++-cppcheck)
