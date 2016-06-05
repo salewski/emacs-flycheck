@@ -21,7 +21,7 @@ Build-Depends:
  gnupg,
  haskell-mode,
  haskell-stack,
- hlint,
+ hlint (>= 1.9.32),
  lacheck,
  pylint,
  python,

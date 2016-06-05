@@ -15,6 +15,7 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Add 0011-disable-code-style-spec-test.patch.
   * Add 0013-patch-test-runner.patch.
   * Refresh remaining patches.
+  * Tighten build dependency on hlint to ensure test suite passes.
   * Drop debian/info since upstream's info manual no longer exists.
   * Don't install CREDITS.md since upstream's credits file no longer exists.
   * Merge and install two upstream changelogs.
