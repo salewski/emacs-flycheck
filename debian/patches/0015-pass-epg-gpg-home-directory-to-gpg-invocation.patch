@@ -1,6 +1,7 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Mon, 6 Jun 2016 12:17:47 +0900
 Subject: pass epg-gpg-home-directory to gpg invocation
+Forwarded: https://github.com/flycheck/flycheck/pull/984
 
 Otherwise, the temporary GPG home directory that the test suite sets up
 doesn't actually get used when gpg is invoked to encrypt the file.
