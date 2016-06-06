@@ -1,6 +1,7 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Mon, 6 Jun 2016 12:32:03 +0900
 Subject: update expected values for rustc version 1.9.0
+Forwarded: https://github.com/flycheck/flycheck/pull/985
 
 ---
  test/flycheck-test.el | 2 +-
