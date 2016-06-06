@@ -1,35 +1,38 @@
 flycheck (27-1) UNRELEASED; urgency=medium
 
   * Package new upstream release.
-  * Bump debhelper compat level to 10.
   * Run test suite with dh_elpa_test.
+    - Bump debhelper compat level to 10.
     - New build dependency on elpa-buttercup.
     - Build dependency on dh-elpa tightened.
-  * Drop 0004-update-pylint-expected-values.patch.
-    Merged upstream.
-  * Drop 0010-skip-haskell-stack-tests-when-homedir-nonexistent.patch.
-    Merged upstream.
-  * Drop 0011-hack-Makefile-to-silence-cmd-not-found-errors.patch.
-    No longer required.
-  * Add 0010-disable-MELPA-tests.patch.
-  * Add 0011-disable-code-style-spec-test.patch.
-  * Add 0013-patch-test-runner.patch.
-  * Add 0014-Fix-cppcheck-test.patch.
-  * Add 0015-pass-epg-gpg-home-directory-to-gpg-invocation.patch.
-  * Add 0016-update-expected-values-for-rustc-version-1.9.0.patch.
-  * Refresh remaining patches.
-  * Tighten build dependencies on hlint and rustc to ensure test suite passes.
-  * Remove d/copyright entry for obsoleted file test/flycheck-checkdoc.el.
-  * Add d/copyright entry for new file test/test-code-style.el.
-  * Drop debian/info since upstream's info manual no longer exists.
-  * Don't install CREDITS.md since upstream's credits file no longer exists.
-  * Merge and install two upstream changelogs.
+  * Build dependency changes:
+    - New build-dep for testsuite: cppcheck.
+    - Bound dh-elpa and elpa-buttercup build dependencies for bug fixes.
+    - Tighten build dependencies on hlint and rustc to ensure test suite passes.
+  * Quilt patch changes:
+    - Drop 0004-update-pylint-expected-values.patch.
+      Merged upstream.
+    - Drop 0010-skip-haskell-stack-tests-when-homedir-nonexistent.patch.
+      Merged upstream.
+    - Drop 0011-hack-Makefile-to-silence-cmd-not-found-errors.patch.
+      No longer required.
+    - Add 0010-disable-MELPA-tests.patch.
+    - Add 0011-disable-code-style-spec-test.patch.
+    - Add 0013-patch-test-runner.patch.
+    - Add 0014-Fix-cppcheck-test.patch.
+    - Add 0015-pass-epg-gpg-home-directory-to-gpg-invocation.patch.
+    - Add 0016-update-expected-values-for-rustc-version-1.9.0.patch.
+    - Refresh remaining patches.
+  * Documentation changes:
+    - Remove d/copyright entry for obsoleted file test/flycheck-checkdoc.el.
+    - Add d/copyright entry for new file test/test-code-style.el.
+    - Drop debian/info since upstream's info manual no longer exists.
+    - Don't install CREDITS.md since upstream's credits file no longer exists.
+    - Merge and install two upstream changelogs.
   * Override dh_auto_build to avoid Cask.
   * Remove comments from d/control due to #823708.
   * Create README.source with information from comments.
   * Run wrap-and-sort -abst.
-  * New build-dep for testsuite: cppcheck.
-  * Bound dh-elpa and elpa-buttercup build dependencies for bug fixes.
   * Bump standards version to 3.9.8 (no changes required).
 
  -- Sean Whitton <spwhitton@spwhitton.name>  Sat, 07 May 2016 13:58:29 -0700
