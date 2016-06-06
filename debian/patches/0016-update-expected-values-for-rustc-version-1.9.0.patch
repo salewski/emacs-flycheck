@@ -1,0 +1,21 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Mon, 6 Jun 2016 12:32:03 +0900
+Subject: update expected values for rustc version 1.9.0
+
+---
+ test/flycheck-test.el | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test/flycheck-test.el b/test/flycheck-test.el
+index ea38be8..68276ad 100644
+--- a/test/flycheck-test.el
++++ b/test/flycheck-test.el
+@@ -4178,7 +4178,7 @@ Why not:
+   (let ((flycheck-disabled-checkers '(rust-cargo)))
+     (flycheck-ert-should-syntax-check
+      "language/rust/src/importing.rs" 'rust-mode
+-     '(1 5 error "unresolved import `super::imported`" :checker rust :id "E0432")
++     '(1 5 error "unresolved import `super::imported`. There are too many initial `super`s." :checker rust :id "E0432")
+      '(1 5 info "run `rustc --explain E0432` to see a detailed explanation"
+          :checker rust))))
+ 
