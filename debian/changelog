@@ -7,7 +7,6 @@ flycheck (27-1) UNRELEASED; urgency=medium
     - Build dependency on dh-elpa tightened.
   * Build dependency changes:
     - New build-dep for testsuite: cppcheck.
-    - Bound dh-elpa and elpa-buttercup build dependencies for bug fixes.
     - Tighten build dependencies on hlint and rustc to ensure test suite passes.
   * Quilt patch changes:
     - Drop 0004-update-pylint-expected-values.patch.
