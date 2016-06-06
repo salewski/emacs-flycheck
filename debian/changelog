@@ -3,10 +3,10 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Package new upstream release.
   * Run test suite with dh_elpa_test.
     - Bump debhelper compat level to 10.
-    - New build dependency on elpa-buttercup.
-    - Build dependency on dh-elpa tightened.
   * Build dependency changes:
     - New build-dep for testsuite: cppcheck.
+    - New build dependency on elpa-buttercup for dh_elpa_test.
+    - Build dependency on dh-elpa tightened for dh_elpa_test.
     - Tighten build dependencies on hlint and rustc to ensure test suite passes.
   * Quilt patch changes:
     - Drop 0004-update-pylint-expected-values.patch.
