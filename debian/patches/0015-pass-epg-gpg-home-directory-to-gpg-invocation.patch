@@ -1,0 +1,22 @@
+From: Sean Whitton <spwhitton@spwhitton.name>
+Date: Mon, 6 Jun 2016 12:17:47 +0900
+Subject: pass epg-gpg-home-directory to gpg invocation
+
+Otherwise, the temporary GPG home directory that the test suite sets up
+doesn't actually get used when gpg is invoked to encrypt the file.
+---
+ test/specs/test-util.el | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/test/specs/test-util.el b/test/specs/test-util.el
+index b7fd749..28029c3 100644
+--- a/test/specs/test-util.el
++++ b/test/specs/test-util.el
+@@ -39,6 +39,7 @@ This function is ABSOLUTELY INSECURE, use only and exclusively for testing."
+   (let* ((process-connection-type nil)
+          (gpg (start-process "flycheck-buttercup-gpg" nil
+                              epg-gpg-program "--batch" "--no-tty"
++                             "--homedir" epg-gpg-home-directory
+                              "-c" "--passphrase"
+                              passphrase "-o" filename "-")))
+     (process-send-string gpg string)
