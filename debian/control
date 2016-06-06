@@ -27,7 +27,7 @@ Build-Depends:
  python,
  python-flake8,
  python-sphinx,
- rustc,
+ rustc (>= 1.9.0),
  shellcheck,
  texinfo,
  tidy,
