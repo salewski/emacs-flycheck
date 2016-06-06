@@ -1,3 +1,6 @@
 # we are generating orig tarballs from git tags and the watch file is
 # only for notification of the existence of new versions
 debian-watch-may-check-gpg-signature
+
+# using experimental compat level for dh_elpa_test
+package-needs-versioned-debhelper-build-depends

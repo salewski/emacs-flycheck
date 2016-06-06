@@ -3,6 +3,8 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Package new upstream release.
   * Run test suite with dh_elpa_test.
     - Bump debhelper compat level to 10.
+    - Override Lintian tag due to using experimental compat level:
+      package-needs-versioned-debhelper-build-depends.
   * Build dependency changes:
     - New build-dep for testsuite: cppcheck.
     - New build dependency on elpa-buttercup for dh_elpa_test.
