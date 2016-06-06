@@ -1,4 +1,4 @@
-flycheck (27-1) UNRELEASED; urgency=medium
+flycheck (27-1) unstable; urgency=medium
 
   * Package new upstream release.
   * Run test suite with dh_elpa_test.
@@ -36,7 +36,7 @@ flycheck (27-1) UNRELEASED; urgency=medium
   * Run wrap-and-sort -abst.
   * Bump standards version to 3.9.8 (no changes required).
 
- -- Sean Whitton <spwhitton@spwhitton.name>  Sat, 07 May 2016 13:58:29 -0700
+ -- Sean Whitton <spwhitton@spwhitton.name>  Mon, 06 Jun 2016 12:59:44 +0900
 
 flycheck (0.25.1-1) unstable; urgency=medium
 
