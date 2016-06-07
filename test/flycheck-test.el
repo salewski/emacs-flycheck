@@ -889,150 +889,6 @@
   (should (flycheck-validate-next-checker '(warning . emacs-lisp) 'strict)))
 
 
-;;; Help for generic checkers
-(ert-deftest flycheck-describe-checker/pops-up-help-buffer ()
-  :tags '(documentation)
-  (dolist (checker (flycheck-defined-checkers))
-    (flycheck-ert-with-help-buffer
-      (shut-up (flycheck-describe-checker checker))
-      (should (buffer-live-p (get-buffer (help-buffer))))
-      (should (get-buffer-window (help-buffer)))
-      (with-current-buffer (help-buffer)
-        (goto-char (point-min))
-        (re-search-forward (rx symbol-start (group (one-or-more not-newline))
-                               symbol-end " is a Flycheck syntax checker"))
-        (should (= (match-beginning 0) 1))
-        (should (string= (match-string 1) (symbol-name checker)))))))
-
-(ert-deftest flycheck-describe-checker/can-navigate-to-source ()
-  :tags '(documentation)
-  (dolist (checker (flycheck-defined-checkers))
-    (flycheck-ert-with-help-buffer
-      (shut-up (flycheck-describe-checker checker))
-      (with-current-buffer (help-buffer)
-        (goto-char (point-min))
-        (re-search-forward
-         (rx "`" (minimal-match (zero-or-more not-newline)) "'"))
-        (should (string= (match-string 0) "`flycheck.el'"))
-        (push-button (+ 2 (match-beginning 0)))
-        (unwind-protect
-            (progn
-              (should (string= (buffer-name) "flycheck.el"))
-              (should (looking-at
-                       (rx line-start "("
-                           symbol-start "flycheck-define-checker" symbol-end " "
-                           symbol-start (group (one-or-more not-newline)) symbol-end
-                           line-end)))
-              (should (string= (match-string 1) (symbol-name checker))))
-          (kill-buffer))))))
-
-(ert-deftest flycheck-describe-checker/help-shows-next-checkers ()
-  :tags '(documentation)
-  (dolist (checker (flycheck-defined-checkers))
-    (let ((next-checkers (flycheck-checker-get checker 'next-checkers))
-          (regexp "It\\s-+runs\\s-+the\\s-+following\\s-+checkers\\s-+afterwards:\n"))
-      (flycheck-ert-with-help-buffer
-        (shut-up (flycheck-describe-checker checker))
-        (with-current-buffer (help-buffer)
-          (goto-char (point-min))
-          (if (not next-checkers)
-              (should-not (re-search-forward regexp nil 'no-error))
-            (re-search-forward regexp)
-            (goto-char (match-end 0))
-            (dolist (next-checker next-checkers)
-              (forward-line 1)
-              (should (looking-at "^     \\* `\\([^']+\\)'\\(?: (maximum level `\\([^']+\\)')\\)?$"))
-              (pcase next-checker
-                (`(,level . ,checker)
-                 (should (equal checker (intern-soft (match-string 1))))
-                 (should (equal level (intern-soft (match-string 2)))))
-                ((pred symbolp)
-                 (should (equal next-checker (intern-soft (match-string 1))))
-                 (should-not (match-string 2)))))
-            ;; After the list of options there should be a blank line to
-            ;; separate the variable list from the actual docstring
-            (forward-line 1)
-            (should (looking-at "^$"))))))))
-
-(ert-deftest flycheck-describe-checker/help-shows-executable-name ()
-  :tags '(documentation)
-  (dolist (checker (flycheck-defined-checkers))
-    (flycheck-ert-with-help-buffer
-      (shut-up (flycheck-describe-checker checker))
-      (with-current-buffer (help-buffer)
-        (goto-char (point-min))
-        (re-search-forward
-         "This\\s-+syntax\\s-+checker\\s-+executes\\s-+\"\\(.+?\\)\"\\(?:\\.\\|,\\)")
-        (should (string= (match-string 1)
-                         (flycheck-checker-default-executable checker)))))))
-
-(ert-deftest flycheck-describe-checker/help-shows-executable-variable ()
-  :tags '(documentation)
-  (dolist (checker (flycheck-defined-checkers))
-    (flycheck-ert-with-help-buffer
-      (shut-up (flycheck-describe-checker checker))
-      (with-current-buffer (help-buffer)
-        (goto-char (point-min))
-        (re-search-forward
-         "The\\s-+executable\\s-+can\\s-+be\\s-+overridden\\s-+with\\s-+`\\(.+?\\)'\\.")
-        (let ((var (flycheck-checker-executable-variable checker)))
-          (should (string= (match-string 1) (symbol-name var))))))))
-
-(ert-deftest flycheck-describe-checker/help-shows-config-file-var ()
-  :tags '(documentation)
-  (dolist (checker (flycheck-defined-checkers))
-    (flycheck-ert-with-help-buffer
-      (shut-up (flycheck-describe-checker checker))
-      (with-current-buffer (help-buffer)
-        (let ((config-file-var (flycheck-checker-get checker 'config-file-var)))
-          (if (not config-file-var)
-              (should-not (string-match-p
-                           (rx "configuration file")
-                           (buffer-substring (point-min) (point-max))))
-            (goto-char (point-min))
-            (re-search-forward
-             ", using\\s-+a\\s-+configuration\\s-+file\\s-+from\\s-+`\\(.+?\\)'\\.")
-            (should (equal (match-string 1) (symbol-name config-file-var)))))))))
-
-(ert-deftest flycheck-describe-checker/help-shows-option-vars ()
-  :tags '(documentation)
-  (dolist (checker (flycheck-defined-checkers))
-    (flycheck-ert-with-help-buffer
-      (shut-up (flycheck-describe-checker checker))
-      (with-current-buffer (help-buffer)
-        (let ((option-vars (-sort #'string<
-                                  (flycheck-checker-get checker 'option-vars)))
-              ;; The regular expression to find the beginning of the option
-              ;; variable list
-              (regexp "This\\s-+syntax\\s-+checker\\s-+can\\s-+be\\s-+configured\\s-+with\\s-+these\\s-+options:\n"))
-          (goto-char (point-min))
-          (if (not option-vars)
-              ;; If there are no variables, we should not see a list of them
-              (should-not (re-search-forward regexp nil 'no-error))
-            ;; Find the beginning of the option var listing
-            (re-search-forward regexp)
-            (goto-char (match-end 0))
-            ;; Test that each variable is properly listed
-            (dolist (var option-vars)
-              (forward-line 1)
-              (should (looking-at "^     \\* `\\(.+?\\)'$"))
-              (should (equal (match-string 1) (symbol-name var))))
-            ;; After the list of options there should be a blank line to
-            ;; separate the variable list from the actual docstring
-            (forward-line 1)
-            (should (looking-at "^$"))))))))
-
-(ert-deftest flycheck-describe-checker/help-shows-checker-docstring ()
-  :tags '(documentation)
-  (dolist (checker (flycheck-defined-checkers))
-    (flycheck-ert-with-help-buffer
-      (shut-up (flycheck-describe-checker checker))
-      (with-current-buffer (help-buffer)
-        (should (string-match-p
-                 (regexp-quote (flycheck-checker-get checker 'documentation))
-                 (buffer-substring (point-min) (point-max))))))))
-
-
 ;;; Checker extensions
 (ert-deftest flycheck-add-next-checker/no-valid-checker ()
   :tags '(extending)
@@ -1127,7 +983,8 @@
     (flycheck-mode)
     (flycheck-ert-buffer-sync)
     (should flycheck-current-errors)
-    (revert-buffer 'ignore-auto 'no-confirm)
+    (let ((hack-local-variables-hook))
+      (revert-buffer 'ignore-auto 'no-confirm))
     (should-not flycheck-current-errors)
     (should-not (flycheck-deferred-check-p))))
 
@@ -2841,189 +2698,6 @@ evaluating BODY."
                  "10,20")))
 
 
-;;; Error parsers for command syntax checkers
-
-(defconst flycheck-checkstyle-xml
-  "<?xml version=\"1.0\" encoding=\"utf-8\"?>
-<checkstyle version=\"4.3\">
-  <file name=\"test-javascript/missing-semicolon.js\">
-    <error line=\"3\" column=\"21\" severity=\"error\" message=\"Missing semicolon.\" source=\"Foo3\" />
-    <error line=\"3\" severity=\"warning\" message=\"Implied global &apos;alert&apos;\" source=\"Foo4\" />
-  </file>
-  <file name=\"test-javascript/missing-quote.js\">
-    <error line=\"undefined\" column=\"undefined\" severity=\"error\" message=\"Cannot read property &apos;id&apos; of undefined\" source=\"Foo1\" />
-  </file>
-</checkstyle>"
-  "Example Checkstyle output from jshint.")
-
-(defconst flycheck-checkstyle-expected-errors
-  (list
-   (flycheck-error-new
-    :filename "test-javascript/missing-semicolon.js"
-    :checker 'checker
-    :buffer 'buffer
-    :line 3
-    :column 21
-    :level 'error
-    :message "Missing semicolon."
-    :id "Foo3")
-   (flycheck-error-new
-    :filename "test-javascript/missing-semicolon.js"
-    :checker 'checker
-    :buffer 'buffer
-    :line 3
-    :column nil
-    :level 'warning
-    :message "Implied global 'alert'"
-    :id "Foo4")
-   (flycheck-error-new
-    :filename "test-javascript/missing-quote.js"
-    :checker 'checker
-    :buffer 'buffer
-    :line nil
-    :column nil
-    :level 'error
-    :message "Cannot read property 'id' of undefined"
-    :id "Foo1"))
-  "Errors to be parsed from `flycheck-checkstyle-xml'.")
-
-(ert-deftest flycheck-parse-checkstyle/with-builtin-xml ()
-  :tags '(error-parsing checkstyle-xml)
-  (let ((flycheck-xml-parser 'flycheck-parse-xml-region))
-    (should (equal (flycheck-parse-checkstyle flycheck-checkstyle-xml
-                                              'checker 'buffer)
-                   flycheck-checkstyle-expected-errors))))
-
-(ert-deftest flycheck-parse-checkstyle/with-libxml2 ()
-  :tags '(error-parsing checkstyle-xml)
-  (skip-unless (fboundp 'libxml-parse-xml-region))
-  (let ((flycheck-xml-parser 'libxml-parse-xml-region))
-    (should (equal (flycheck-parse-checkstyle flycheck-checkstyle-xml
-                                              'checker 'buffer)
-                   flycheck-checkstyle-expected-errors))))
-
-(ert-deftest flycheck-parse-checkstyle/automatic-parser ()
-  :tags '(error-parsing checkstyle-xml)
-  (should (equal (flycheck-parse-checkstyle flycheck-checkstyle-xml
-                                            'checker 'buffer)
-                 flycheck-checkstyle-expected-errors)))
-
-(defconst flycheck-cppcheck-xml
-  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<results version=\"2\">
-  <cppcheck version=\"1.52\"/>
-  <errors>
-  <error id=\"toomanyconfigs\" severity=\"information\" msg=\"Too many #ifdef configurations - cppcheck only checks 12 configurations. Use --force to check all configurations. For more details, use --enable=information.\" verbose=\"The checking \
-of the file will be interrupted because there are too many #ifdef configurations. Checking of all #ifdef configurations can be forced by --force command line option or from GUI preferences. However that may increase the checking time. For\
- more details, use --enable=information.\">
-  </error>
-  <error id=\"nullPointer\" severity=\"error\" msg=\"Null pointer dereference\" verbose=\"Null pointer dereference\">
-  <location file=\"foo\" line=\"4\"/>
-  <location file=\"bar\" line=\"6\"/>
-  </error>
-  <error id=\"comparisonOfBoolWithInt\" severity=\"warning\" msg=\"Comparison of a boolean with integer that is neither 1 nor 0\" verbose=\"The expression &quot;x&quot; is of type 'bool' and it is compared against a integer value that is neither 1 nor 0.\">
-    <location file=\"eggs\" line=\"2\"/>
-  </error>
-  </errors>
-</results>"
-  "Example cppcheck output.")
-
-(defconst flycheck-cppcheck-expected-errors
-  (list
-   (flycheck-error-new
-    :filename "foo"
-    :buffer 'buffer
-    :checker 'checker
-    :line 4
-    :column nil
-    :level 'error
-    :message "Null pointer dereference"
-    :id "nullPointer")
-   (flycheck-error-new
-    :filename "bar"
-    :buffer 'buffer
-    :checker 'checker
-    :line 6
-    :column nil
-    :level 'error
-    :message "Null pointer dereference"
-    :id "nullPointer")
-   (flycheck-error-new
-    :filename "eggs"
-    :buffer 'buffer
-    :checker 'checker
-    :line 2
-    :column nil
-    :level 'warning
-    :message "The expression \"x\" is of type 'bool' and it is compared against a integer value that is neither 1 nor 0."
-    :id "comparisonOfBoolWithInt")))
-
-(ert-deftest flycheck-parse-cppcheck ()
-  :tags '(error-parsing cppcheck-xml)
-  (should (equal (flycheck-parse-cppcheck flycheck-cppcheck-xml
-                                          'checker 'buffer)
-                 flycheck-cppcheck-expected-errors)))
-
-(ert-deftest flycheck-parse-cppcheck/empty-errors-list-with-automatic-parser ()
-  :tags '(error-parsing cppcheck-xml)
-  (should-not (flycheck-parse-cppcheck "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<results version=\"2\">
-  <cppcheck version=\"1.60.1\"/>
-  <errors>
-  </errors>
-</results>" nil nil)))
-
-(ert-deftest flycheck-parse-cppcheck/empty-errors-list-with-builtin-parser ()
-  :tags '(error-parsing cppcheck-xml)
-  (let ((flycheck-xml-parser #'flycheck-parse-xml-region))
-    (should-not (flycheck-parse-cppcheck "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<results version=\"2\">
-  <cppcheck version=\"1.60.1\"/>
-  <errors>
-  </errors>
-</results>" nil nil))))
-
-(defconst flycheck-phpmd-xml
-  "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
-<pmd version=\"1.5.0\" timestamp=\"2014-12-02T18:13:44+00:00\">
-  <file name=\"foo.php\">
-    <violation beginline=\"21\" endline=\"21\" rule=\"UnusedPrivateField\" ruleset=\"Unused Code Rules\" externalInfoUrl=\"http://phpmd.org/rules/unusedcode.html#unusedprivatefield\" priority=\"3\">
-      Avoid unused private fields such as '$FOO'.
-    </violation>
-    <violation beginline=\"24\" endline=\"27\" rule=\"UnusedPrivateMethod\" ruleset=\"Unused Code Rules\" package=\"Flycheck\" externalInfoUrl=\"http://phpmd.org/rules/unusedcode.html#unusedprivatemethod\" class=\"A\" method=\"bar\" priority=\"3\">
-      Avoid unused private methods such as 'bar'.
-    </violation>
-    <violation beginline=\"24\" endline=\"24\" rule=\"UnusedFormalParameter\" ruleset=\"Unused Code Rules\" externalInfoUrl=\"http://phpmd.org/rules/unusedcode.html#unusedformalparameter\" priority=\"3\">
-      Avoid unused parameters such as '$baz'.
-    </violation>
-  </file>
-</pmd>"
-  "Example phpmd output.")
-
-(ert-deftest flycheck-parse-phpmd ()
-  :tags '(error-parsing phpmd-xml)
-  (should (equal (flycheck-parse-phpmd flycheck-phpmd-xml 'foo 'buffer)
-                 (list
-                  (flycheck-error-new-at 21 nil 'warning
-                                         "Avoid unused private fields such as '$FOO'."
-                                         :id "UnusedPrivateField"
-                                         :checker 'foo
-                                         :buffer 'buffer
-                                         :filename "foo.php")
-                  (flycheck-error-new-at 24 nil 'warning
-                                         "Avoid unused private methods such as 'bar'."
-                                         :id "UnusedPrivateMethod"
-                                         :checker 'foo
-                                         :buffer 'buffer
-                                         :filename "foo.php")
-                  (flycheck-error-new-at 24 nil 'warning
-                                         "Avoid unused parameters such as '$baz'."
-                                         :id "UnusedFormalParameter"
-                                         :checker 'foo
-                                         :buffer 'buffer
-                                         :filename "foo.php")))))
-
-
 ;;; Built-in checkers
 
 ;; Tell the byte compiler about the variables we'll use
@@ -3122,7 +2796,13 @@ of the file will be interrupted because there are too many #ifdef configurations
         (flycheck-cppcheck-inconclusive nil)
         (flycheck-cppcheck-checks '("style")))
     (flycheck-ert-should-syntax-check
-     "language/c_c++/style.cpp" '(c-mode c++-mode)
+     "language/c_c++/style.cpp" 'c-mode
+     '(5 nil info "Unused variable: unused" :id "unusedVariable"
+         :checker c/c++-cppcheck)
+     '(9 nil error "Division by zero." :id "zerodiv" :checker c/c++-cppcheck))
+
+    (flycheck-ert-should-syntax-check
+     "language/c_c++/style.cpp" 'c++-mode
      '(5 nil info "Unused variable: unused" :id "unusedVariable"
          :checker c/c++-cppcheck)
      '(9 nil error "Division by zero." :id "zerodiv" :checker c/c++-cppcheck)
@@ -3797,13 +3477,13 @@ Why not:
    '(4 11 warning "variable 'var2' is never set"
        :id "W221" :checker luacheck)))
 
-(flycheck-ert-def-checker-test luacheck lua no-warnings
+(flycheck-ert-def-checker-test lua-luacheck lua no-warnings
   (let ((flycheck-luacheckrc "luacheckrc"))
     (flycheck-ert-should-syntax-check
      "language/lua/warnings.lua" 'lua-mode)))
 
 (flycheck-ert-def-checker-test lua lua nil
-  (let ((flycheck-disabled-checkers '(luacheck)))
+  (let ((flycheck-disabled-checkers '(lua-luacheck)))
     (flycheck-ert-should-syntax-check
      "language/lua/syntax-error.lua" 'lua-mode
      '(5 nil error "unfinished string near '\"oh no'"
@@ -4145,10 +3825,9 @@ Why not:
     (flycheck-ert-should-syntax-check
      "language/rust/src/multiline-error.rs" 'rust-mode
      '(7 9 error "mismatched types:
- expected `u8`,\n    found `i8`
-(expected u8,\n    found i8)" :checker rust :id "E0308")
+ expected `u8`,\n    found `i8`" :checker rust :id "E0308")
      '(7 9 info "run `rustc --explain E0308` to see a detailed explanation"
-        :checker rust))))
+         :checker rust))))
 
 (flycheck-ert-def-checker-test rust rust warning
   (let ((flycheck-disabled-checkers '(rust-cargo)))

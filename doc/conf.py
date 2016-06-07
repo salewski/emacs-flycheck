@@ -92,6 +92,7 @@ rst_prolog = """\
 exclude_patterns = ['_build']
 default_role = 'any'
 primary_domain = 'el'
+templates_path = ['_templates']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -116,8 +117,9 @@ html_theme_options = {
     'description': 'Syntax checking for GNU Emacs',
     'github_user': 'flycheck',
     'github_repo': 'flycheck',
+    'github_type': 'star',
     'github_banner': True,
-    'travis_button': True,
+    'travis_button': False,
     # Google Analytics ID for our documentation.  On ReadTheDocs it's set via
     # the Admin interface so we'll skip it here.
     'analytics_id': 'UA-71100672-2' if not ON_RTD else None,

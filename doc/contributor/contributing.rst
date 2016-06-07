@@ -21,6 +21,8 @@ Conduct <flycheck-conduct>`.
 .. _need your help with: https://github.com/flycheck/flycheck/issues?q=is%3Aissue+is%3Aopen+label%3A%22S-needs+your+love%22
 .. _beginner-friendly tasks: https://github.com/flycheck/flycheck/labels/E-beginner%20friendly
 
+.. _flycheck-bug-reports:
+
 Bug reports
 ===========
 
@@ -220,10 +222,11 @@ columns which correspond to ``S-`` labels on Github:
   what’s coming next to Flycheck.
 - When we start to work on an issue it moves into *In Progress* (``S-in
   progress`` label).
-- Open pull requests, whether from contributors or core developers, start in the
-  ``S-to review`` column for review by maintainers.  Once review is complete we
-  will either merge the pull request and thus move it to *Done*, or move the
-  issue back to ``S-in progress`` if the pull request still needs work.
+- *To review* (``S-to review`` label) holds pull requests and patches which need
+  review by maintainers.  All pull requests, whether from developers or external
+  contributors start here.  Once a review is complete we will either merge the
+  pull request and thus move it to *Done*, or move the issue back to ``S-in
+  progress`` if the pull request still needs work.
 - Eventually issues move into *Done* when they are closed.
 
 In addition to these columns which reflect the basic issue workflow we

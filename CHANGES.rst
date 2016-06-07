@@ -1,3 +1,30 @@
+28 (Jun 05, 2016)
+=================
+
+- **Breaking changes**:
+
+  - Rename ``luacheck`` to ``lua-luacheck`` to comply with our naming
+    conventions
+  - Remove ``flycheck-cppcheck-language-standard`` in favour of
+    ``flycheck-cppcheck-standards`` which is a list of standards [GH-960]
+
+- New features:
+
+  - Add option to set binary name for ``rust-cargo`` [GH-958]
+  - Add ``flycheck-cppcheck-standards`` to pass multiple code standards to
+    cppcheck [GH-960]
+  - Add ``flycheck-cppcheck-suppressions`` to suppress warnings for cppcheck
+    [GH-960]
+
+- Improvements:
+
+  - Check Racket syntax in Geiser Mode [GH-979]
+
+- Bug fixes
+
+  - Do not signal errors when tslint reports no output [GH-981]
+  - Do not generate invalid temporary filenames on Windows [GH-983]
+
 27 (May 08, 2016)
 =================
 

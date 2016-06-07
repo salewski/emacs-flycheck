@@ -169,9 +169,15 @@ to view the docstring of the syntax checker.  Likewise, you may use
          A list of include directories.  Relative paths are relative to the file
          being checked.
 
-      .. option:: flycheck-cppcheck-language-standard
+      .. option:: flycheck-cppcheck-standards
 
-         The C or C++ language standard to use via ``--std=``.
+         The C, C++ and/or POSIX standards to use via one or more ``--std=``
+         arguments.
+
+      .. option:: flycheck-cppcheck-suppressions
+
+         The cppcheck suppressions list to use via one or more ``--suppress=``
+         arguments.
 
 .. supported-language:: CFEngine
 
@@ -569,9 +575,9 @@ to view the docstring of the syntax checker.  Likewise, you may use
 
 .. supported-language:: Lua
 
-   Flycheck checks Lua with `luacheck`, falling back to `lua`.
+   Flycheck checks Lua with `lua-luacheck`, falling back to `lua`.
 
-   .. syntax-checker:: luacheck
+   .. syntax-checker:: lua-luacheck
 
       Check syntax and lint with Luacheck_.
 
@@ -846,6 +852,13 @@ to view the docstring of the syntax checker.  Likewise, you may use
          The type of the crate to check, as string for the ``--crate-type``
          option.
 
+      .. option:: flycheck-rust-binary-name
+
+         The name of the binary to pass to ``cargo rustc --bin``, as a string.
+
+         Only required when `flycheck-rust-crate-type` is ``bin`` and the crate
+         has multiple targets.
+
       .. option:: flycheck-rust-library-path
 
          A list of additional library directories. Relative paths are relative
@@ -988,12 +1001,6 @@ to view the docstring of the syntax checker.  Likewise, you may use
       Check syntax and style with `TSLint <https://github.com/palantir/tslint>`_.
 
       .. syntax-checker-config-file:: flycheck-typescript-tslint-config
-
-      .. important::
-
-         A configuration file is mandatory for this syntax checker.  If
-         `flycheck-typescript-tslint-config` is not set or the configuration
-         file not found this syntax checker will not be used.
 
       .. option:: flycheck-typescript-tslint-rulesdir
 
