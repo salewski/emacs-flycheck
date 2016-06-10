@@ -1,4 +1,4 @@
-flycheck (28-1) UNRELEASED; urgency=medium
+flycheck (28-1) unstable; urgency=medium
 
   * Package new upstream release.
   * Drop 0012-update-rustc-expected-values.patch.
@@ -7,7 +7,7 @@ flycheck (28-1) UNRELEASED; urgency=medium
     Included in this upstream release.
   * Refresh patches.
 
- -- Sean Whitton <spwhitton@spwhitton.name>  Tue, 07 Jun 2016 16:36:03 +0900
+ -- Sean Whitton <spwhitton@spwhitton.name>  Fri, 10 Jun 2016 16:13:54 +0900
 
 flycheck (27-1) unstable; urgency=medium
 
