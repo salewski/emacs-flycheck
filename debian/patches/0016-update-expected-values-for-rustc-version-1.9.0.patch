@@ -7,11 +7,9 @@ Forwarded: https://github.com/flycheck/flycheck/pull/985
  test/flycheck-test.el | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/test/flycheck-test.el b/test/flycheck-test.el
-index ea38be8..68276ad 100644
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -4178,7 +4178,7 @@ Why not:
+@@ -3852,7 +3852,7 @@ Why not:
    (let ((flycheck-disabled-checkers '(rust-cargo)))
      (flycheck-ert-should-syntax-check
       "language/rust/src/importing.rs" 'rust-mode

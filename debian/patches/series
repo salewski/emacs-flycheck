@@ -6,10 +6,8 @@
 0007-clear-GPG-agent-env-vars.patch
 0008-set-epg-gpg-home-directory.patch
 0009-patch-README-for-Debian.patch
-0012-update-rustc-expected-values.patch
 0010-disable-MELPA-tests.patch
 0011-disable-code-style-spec-test.patch
 0013-patch-test-runner.patch
-0014-Fix-cppcheck-test.patch
 0015-pass-epg-gpg-home-directory-to-gpg-invocation.patch
 0016-update-expected-values-for-rustc-version-1.9.0.patch

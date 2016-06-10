@@ -1,6 +1,10 @@
 flycheck (28-1) UNRELEASED; urgency=medium
 
   * Package new upstream release.
+  * Drop 0012-update-rustc-expected-values.patch.
+    Obsolete with latest rustc.
+  * Drop 0014-Fix-cppcheck-test.patch.
+    Included in this upstream release.
   * Refresh patches.
 
  -- Sean Whitton <spwhitton@spwhitton.name>  Tue, 07 Jun 2016 16:36:03 +0900

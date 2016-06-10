@@ -20,7 +20,7 @@ autoloads file.  So hack the tests to use another.
      (should (flycheck-autoloads-file-p))))
  
  (ert-deftest flycheck-autoloads-file-p/a-plain-file ()
-@@ -3334,7 +3334,7 @@ See https://github.com/flycheck/flycheck
+@@ -3014,7 +3014,7 @@ See https://github.com/flycheck/flycheck
    ;; collect the autoloads of newly installed packages before writing the
    ;; autoloads file.  See `https://github.com/flycheck/flycheck/issues/45' and
    ;; `https://github.com/bbatsov/prelude/issues/253' for details.

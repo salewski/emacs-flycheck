@@ -20,7 +20,7 @@ autobuilder infrastructure.
 
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -3090,7 +3090,7 @@ of the file will be interrupted because
+@@ -2764,7 +2764,7 @@ evaluating BODY."
    (let ((flycheck-disabled-checkers '(c/c++-clang)))
      (flycheck-ert-should-syntax-check
       "language/c_c++/error.cpp" 'c++-mode
@@ -29,7 +29,7 @@ autobuilder infrastructure.
           :checker c/c++-gcc))))
  
  (flycheck-ert-def-checker-test c/c++-gcc (c c++) fatal-error
-@@ -3104,7 +3104,7 @@ of the file will be interrupted because
+@@ -2778,7 +2778,7 @@ evaluating BODY."
    (let ((flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck)))
      (flycheck-ert-should-syntax-check
       "language/c_c++/warning.c" 'c-mode
@@ -38,7 +38,7 @@ autobuilder infrastructure.
       '(7 15 warning "comparison between signed and unsigned integer expressions"
           :checker c/c++-gcc)
       '(8 7 warning "#warning" :checker c/c++-gcc))))
-@@ -3395,9 +3395,9 @@ See https://github.com/flycheck/flycheck
+@@ -3075,9 +3075,9 @@ See https://github.com/flycheck/flycheck
  (flycheck-ert-def-checker-test fortran-gfortran fortran warning
    (flycheck-ert-should-syntax-check
     "language/fortran/warning.f90" '(fortran-mode f90-mode)
@@ -50,7 +50,7 @@ autobuilder infrastructure.
          :checker fortran-gfortran)))
  
  (flycheck-ert-def-checker-test go-gofmt go syntax-error
-@@ -3507,17 +3507,17 @@ See https://github.com/flycheck/flycheck
+@@ -3187,17 +3187,17 @@ See https://github.com/flycheck/flycheck
    (let ((flycheck-disabled-checkers '(haskell-ghc)))
      (flycheck-ert-should-syntax-check
       "language/haskell/SyntaxError.hs" 'haskell-mode
@@ -71,7 +71,7 @@ autobuilder infrastructure.
  In the expression: putStrLn True" :checker haskell-stack-ghc))))
  
  (flycheck-ert-def-checker-test (haskell-stack-ghc haskell-hlint) haskell literate
-@@ -3551,16 +3551,16 @@ Why not:
+@@ -3231,16 +3231,16 @@ Why not:
    (let ((flycheck-disabled-checkers '(haskell-stack-ghc)))
      (flycheck-ert-should-syntax-check
       "language/haskell/SyntaxError.hs" 'haskell-mode

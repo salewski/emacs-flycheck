@@ -10,7 +10,7 @@ sqlint not available in Debian
 
 --- a/test/flycheck-test.el
 +++ b/test/flycheck-test.el
-@@ -4276,11 +4276,11 @@ Why not:
+@@ -3955,11 +3955,11 @@ Why not:
     "language/slim.slim" 'slim-mode
     `(2 1 error "Unexpected indentation" :checker slim)))
  

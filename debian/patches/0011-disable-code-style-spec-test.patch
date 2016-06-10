@@ -10,24 +10,25 @@ outside of git.
 
 --- a/test/specs/test-code-style.el
 +++ b/test/specs/test-code-style.el
-@@ -55,35 +55,35 @@
+@@ -57,34 +57,34 @@
                                    (not (string-match-p (rx "test/resources/") fn))))
                  sources)))
  
 -(describe "Code style"
 -  (dolist (source (flycheck/find-all-elisp-files))
 -    (describe (format "File %s" (file-relative-name source))
--      (it "has proper documentation format"
--        (assume (version<= "25" emacs-version)
--                "Our documentation style matches Emacs 25 only")
--        (expect (flycheck/checkstyle source)
--                :to-equal ""))
+-      (before-each
+-        (assume (version<= "25" emacs-version) "Our style must match Emacs 25"))
 +;; (describe "Code style"
 +;;   (dolist (source (flycheck/find-all-elisp-files))
 +;;     (describe (format "File %s" (file-relative-name source))
++;;       (before-each
++;;         (assume (version<= "25" emacs-version) "Our style must match Emacs 25"))
+ 
+-      (it "has proper documentation format"
+-        (expect (flycheck/checkstyle source)
+-                :to-equal ""))
 +;;       (it "has proper documentation format"
-+;;         (assume (version<= "25" emacs-version)
-+;;                 "Our documentation style matches Emacs 25 only")
 +;;         (expect (flycheck/checkstyle source)
 +;;                 :to-equal ""))
  
@@ -36,8 +37,6 @@ outside of git.
 -      ;; indentation rules.
 -      (unless (equal (file-relative-name source) "test/init.el")
 -        (it "is properly indented"
--          (assume (version<= "25" emacs-version)
--                  "Our indentation targets Emacs 25 only")
 -          (with-temp-buffer
 -            (insert-file-contents source)
 -            (set-buffer-modified-p nil)
@@ -57,8 +56,6 @@ outside of git.
 +;;       ;; indentation rules.
 +;;       (unless (equal (file-relative-name source) "test/init.el")
 +;;         (it "is properly indented"
-+;;           (assume (version<= "25" emacs-version)
-+;;                   "Our indentation targets Emacs 25 only")
 +;;           (with-temp-buffer
 +;;             (insert-file-contents source)
 +;;             (set-buffer-modified-p nil)
