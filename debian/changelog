@@ -1,3 +1,9 @@
+flycheck (28-2) UNRELEASED; urgency=medium
+
+  * Set DH_ELPA_TEST_AUTOPKGTEST_KEEP in d/rules.
+
+ -- Sean Whitton <spwhitton@spwhitton.name>  Tue, 14 Jun 2016 15:48:27 +0900
+
 flycheck (28-1) unstable; urgency=medium
 
   * Package new upstream release.

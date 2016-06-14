@@ -2,6 +2,7 @@
 
 export DH_ELPA_TEST_ERT_LOAD_PATH=/usr/share/emacs/site-lisp/haskell-mode
 export DH_ELPA_TEST_ERT_HELPER=debian/ert-helper.el
+export DH_ELPA_TEST_AUTOPKGTEST_KEEP=flycheck-buttercup.el,flycheck-ert.el,test/*
 
 %:
 	dh $@ --parallel --with elpa
