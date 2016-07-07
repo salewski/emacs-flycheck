@@ -1,10 +1,10 @@
-flycheck (28-2) UNRELEASED; urgency=medium
+flycheck (28-2) unstable; urgency=medium
 
   * Set DH_ELPA_TEST_AUTOPKGTEST_KEEP in d/rules.
   * Add 0014-Update-expected-values-for-cppcheck-1.74.patch.
     Fixes build in current sid.
 
- -- Sean Whitton <spwhitton@spwhitton.name>  Tue, 14 Jun 2016 15:48:27 +0900
+ -- Sean Whitton <spwhitton@spwhitton.name>  Thu, 07 Jul 2016 13:24:32 +0900
 
 flycheck (28-1) unstable; urgency=medium
 
