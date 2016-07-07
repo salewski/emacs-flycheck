@@ -11,3 +11,4 @@
 0013-patch-test-runner.patch
 0015-pass-epg-gpg-home-directory-to-gpg-invocation.patch
 0016-update-expected-values-for-rustc-version-1.9.0.patch
+0014-Update-expected-values-for-cppcheck-1.74.patch
