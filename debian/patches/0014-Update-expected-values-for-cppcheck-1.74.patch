@@ -1,6 +1,7 @@
 From: Sean Whitton <spwhitton@spwhitton.name>
 Date: Thu, 7 Jul 2016 12:01:01 +0900
 Subject: Update expected values for cppcheck 1.74
+Forwarded: https://github.com/flycheck/flycheck/pull/1004
 
 ---
  test/flycheck-test.el | 6 +++++-
